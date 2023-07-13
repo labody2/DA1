@@ -1,7 +1,7 @@
 <?php
 session_start(); // Bắt đầu phiên làm việc
 
-include 'C:\Users\dungv\Documents\Dự án 1\DA1\api\connect.php';
+include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
 
 // Khởi tạo biến lưu thông báo lỗi
 $errorMsg = "";

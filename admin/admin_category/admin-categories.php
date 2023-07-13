@@ -40,7 +40,6 @@ if (isset($_SESSION['username'])) {
     }
 } else {
     echo "Bạn không có quyền truy cập vào trang này.";
-    echo"1";
     exit();
     // Người dùng chưa đăng nhập, xử lý tương ứng
 }
@@ -124,12 +123,6 @@ mysqli_close($conn);
                     Creat-time
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Product
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Description
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Action
                 </th>
             </tr>
@@ -159,15 +152,6 @@ mysqli_close($conn);
                     echo "</td>";
                     echo "<td class='px-6 py-4'>";
                     echo $row["create_time"];
-                    echo "</td>";
-                    echo "<td class='px-6 py-4'>";
-                    echo $row["category"];
-                    echo "</td>";
-                    echo "<td class='px-6 py-4'>";
-                    echo "$" . $row["price"];
-                    echo "</td>";
-                    echo "<td class='px-6 py-4'>";
-                    echo $row["description"];
                     echo "</td>";
                     echo "<td class='px-6 py-4'>";
                     echo "<a href='update_product.php?product_id=" . $row["id"] . "' class='font-medium text-blue-600 dark:text-blue-500 hover:underline'>Edit</a>";
