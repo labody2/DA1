@@ -6,48 +6,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<?php
-// Kết nối cơ sở dữ liệu và thực hiện câu truy vấn
-include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
-
-// Kiểm tra thông tin session
-session_start();
-if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
-
-    // Truy vấn để lấy vai trò từ username
-    $sql = "SELECT role FROM users WHERE username = '$username'";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $role = $row['role'];
-
-        if ($role === 'admin') {
-            // Người dùng có vai trò "admin", cho phép truy cập vào file "admin.php"
-        } else {
-            // Người dùng không có quyền truy cập, hiển thị thông báo hoặc chuyển hướng đến trang khác
-            echo "Bạn không có quyền truy cập vào trang này.";
-            // Hoặc:
-            // header("Location: ../signin_signup/signin.php");
-            exit();
-        }
-    } else {
-        // Không tìm thấy thông tin người dùng, xử lý tương ứng
-        echo "Bạn không có quyền truy cập vào trang này.";
-        echo"2";
-            exit();
-    }
-} else {
-    echo "Bạn không có quyền truy cập vào trang này.";
-    exit();
-    // Người dùng chưa đăng nhập, xử lý tương ứng
-}
-
-// Đóng kết nối
-mysqli_close($conn);
+<?php include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
+// include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
 ?>
-<?php include 'C:\Users\dungv\Desktop\DA1\model\connect.php';?>
+
+<div id="editForm" class="inset-0 bg-white dark:bg-gray-700 z-50" style="display: none">
+    <form id="categoryForm" action="update_categoryries-update.php" method="POST">
+        <input type="hidden" name="category_id" id="category_id">
+        <label for="category_name">Category Name:</label>
+        <input type="text" name="category_name" id="category_name">
+        <button type="submit">Save</button>
+    </form>
+</div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <div class="flex items-center justify-between pb-4">
         <div>
@@ -120,7 +90,7 @@ mysqli_close($conn);
                     Category name
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Creat-time
+                    Create time
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Action
@@ -129,7 +99,6 @@ mysqli_close($conn);
         </thead>
         <tbody>
             <?php
-            
             //get_products
             $sql = "SELECT * FROM categories";
             $result = mysqli_query($conn, $sql);
@@ -137,24 +106,24 @@ mysqli_close($conn);
             if (mysqli_num_rows($result) > 0) {
                 // Duyệt qua từng hàng kết quả
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>";
+                    echo "<tr id='category_" . $row["id"] . "' class='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>";
                     echo "<td class='w-4 p-4'>";
                     echo "<div class='flex items-center'>";
                     echo "<input id='checkbox-table-search-1' type='checkbox' class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'>";
                     echo "<label for='checkbox-table-search-1' class='sr-only'>checkbox</label>";
                     echo "</div>";
                     echo "</td>";
-                    echo "<th scope='row' class='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'>";
+                    echo "<td class='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'>";
                     echo $row["id"];
-                    echo "</th>";
-                    echo "<th scope='row' class='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'>";
+                    echo "</td>";
+                    echo "<td class='px-6 py-4'>";
                     echo $row["name"];
                     echo "</td>";
                     echo "<td class='px-6 py-4'>";
                     echo $row["create_time"];
                     echo "</td>";
                     echo "<td class='px-6 py-4'>";
-                    echo "<a href='update_product.php?product_id=" . $row["id"] . "' class='font-medium text-blue-600 dark:text-blue-500 hover:underline'>Edit</a>";
+                    echo "<a href='#' class='font-medium text-blue-600 dark:text-blue-500 hover:underline' onclick='showEditForm(" . $row["id"] . ")'>Edit</a>";
                     echo "<br>";
                     echo "<a href='#' class='font-medium text-red-600 dark:text-red-500 hover:underline' onclick='confirmDelete(" . $row["id"] . ")'>Del</a>";
                     echo "</td>";
@@ -162,23 +131,42 @@ mysqli_close($conn);
                 }
             } else {
                 echo "<tr>";
-                echo "<td colspan='6'>Không có danh mục nào tồn tại.</td>";
+                echo "<td colspan='6'>Không có danh mục nào tồn tại.</td>";
                 echo "</tr>";
             }
 
             // Đóng kết nối
             mysqli_close($conn);
             ?>
-
         </tbody>
     </table>
+
     <script>
-    function confirmDelete(productId) {
-        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
-            window.location.href = "/DA1/api/del_product.php?product_id=" + productId;
+    function confirmDelete(categoryId) {
+        if (confirm("Bạn có chắc chắn muốn xóa danh mục này?")) {
+            window.location.href = "/DA1/api/del_category.php?category_id=" + categoryId;
         }
     }
-</script>
+    function showEditForm(categoryId) {
+        var form = document.getElementById('categoryForm');
+        var categoryNameInput = document.getElementById('category_name');
+        var categoryRow = document.getElementById('category_' + categoryId);
+        var categoryName = categoryRow.cells[2].innerText;
+        
+        form.setAttribute('action', 'update_category.php');
+        document.getElementById('category_id').value = categoryId;
+        categoryNameInput.value = categoryName;
+        
+        document.getElementById('editForm').style.display = 'block';
+    }
+    
+    // Prevent default event when clicking on a link
+    document.querySelectorAll('.edit-link').forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+    });
+    </script>
 
 </div>
 
