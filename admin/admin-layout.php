@@ -123,6 +123,13 @@ include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
         includeContent('article-category.php');
       });
     });
+    // Trong script của trang trước đó (admin-layout.php), sau khi load trang, thêm mã sau để tự động load lại trang
+    window.addEventListener('load', function() {
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    });
+
   </script>
 </body>
 

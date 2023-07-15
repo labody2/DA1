@@ -10,17 +10,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $currentStatus = $row["status"];
-        
+        echo $currentStatus;
         // Đảo ngược giá trị status
         $newStatus = ($currentStatus == 1) ? 0 : 1;
         echo $newStatus;
         // Cập nhật giá trị trong cơ sở dữ liệu
-        $updateSql = "UPDATE users SET status = '$newStatus' WHERE id = '$userId'";
+        $updateSql = "UPDATE users SET status = $newStatus WHERE id = '$userId'";
         if (mysqli_query($conn, $updateSql)) {
-            echo "success";
+            // Cập nhật trạng thái thành công
+            echo '<script>window.location.href = "' . $_SERVER["HTTP_REFERER"] . '";</script>';
+            exit; // Đảm bảo không có mã HTML hoặc mã PHP khác được thực thi sau khi chuyển hướng
         } else {
-            echo "error";
-        }
+            echo "error: " . mysqli_error($conn);
+        }        
     } else {
         echo "User not found";
     }
