@@ -8,48 +8,9 @@
 </head>
 <body>
 <?php
-// Kết nối cơ sở dữ liệu và thực hiện câu truy vấn
-include 'C:\Users\dungv\Documents\Dự án 1\DA1\api\connect.php';
-
-// Kiểm tra thông tin session
-session_start();
-if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
-
-    // Truy vấn để lấy vai trò từ username
-    $sql = "SELECT role FROM users WHERE username = '$username'";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $role = $row['role'];
-
-        if ($role === 'admin') {
-            // Người dùng có vai trò "admin", cho phép truy cập vào file "admin.php"
-        } else {
-            // Người dùng không có quyền truy cập, hiển thị thông báo hoặc chuyển hướng đến trang khác
-            echo "Bạn không có quyền truy cập vào trang này.";
-            // Hoặc:
-            // header("Location: ../signin_signup/signin.php");
-            exit();
-        }
-    } else {
-        // Không tìm thấy thông tin người dùng, xử lý tương ứng
-        echo "Bạn không có quyền truy cập vào trang này.";
-        echo"2";
-            exit();
-    }
-} else {
-    echo "Bạn không có quyền truy cập vào trang này.";
-    echo"1";
-    exit();
-    // Người dùng chưa đăng nhập, xử lý tương ứng
-}
-
-// Đóng kết nối
-mysqli_close($conn);
+include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
 ?>
-<?php include 'C:\Users\dungv\Documents\Dự án 1\DA1\api\connect.php';?>
+<?php include 'C:\Users\dungv\Desktop\DA1\model\connect.php';?>
 
 <?php
 // Kiểm tra xem có tham số truy vấn "product_id" được gửi đi hay không
@@ -81,7 +42,7 @@ mysqli_close($conn);
 
 <h1>Chỉnh sửa sản phẩm</h1>
 <div class="container" style="display: flex;justify-content: center;align-items: center;height: 100vh;">
-    <form action="/DA1/api/admin_update_product.php" method="POST" style="width: 500px;">
+    <form action="admin_update_product.php" method="POST" style="width: 500px;">
         <div class="relative z-0 w-full mb-6 group">
             <input type="text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value="<?php echo $productName; ?>" required />
             <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Tên sản phẩm</label>

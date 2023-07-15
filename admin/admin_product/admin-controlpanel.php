@@ -7,51 +7,16 @@
 </head>
 <body>
 <?php
-// Kết nối cơ sở dữ liệu và thực hiện câu truy vấn
-include 'C:\Users\dungv\Documents\Dự án 1\DA1\api\connect.php';
-
-// Kiểm tra thông tin session
-session_start();
-if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
-
-    // Truy vấn để lấy vai trò từ username
-    $sql = "SELECT role FROM users WHERE username = '$username'";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $role = $row['role'];
-
-        if ($role === 'admin') {
-            // Người dùng có vai trò "admin", cho phép truy cập vào file "admin.php"
-        } else {
-            // Người dùng không có quyền truy cập, hiển thị thông báo hoặc chuyển hướng đến trang khác
-            echo "Bạn không có quyền truy cập vào trang này.";
-            // Hoặc:
-            // header("Location: ../signin_signup/signin.php");
-            exit();
-        }
-    } else {
-        // Không tìm thấy thông tin người dùng, xử lý tương ứng
-        echo "Bạn không có quyền truy cập vào trang này.";
-        echo"2";
-            exit();
-    }
-} else {
-    echo "Bạn không có quyền truy cập vào trang này.";
-    echo"1";
-    exit();
-    // Người dùng chưa đăng nhập, xử lý tương ứng
-}
-
-// Đóng kết nối
-mysqli_close($conn);
+// include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
 ?>
-<?php include 'C:\Users\dungv\Documents\Dự án 1\DA1\api\connect.php';?>
+<?php include 'C:\Users\dungv\Desktop\DA1\model\connect.php';?>
+<div id="alert-container"></div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    
     <div class="flex items-center justify-between pb-4">
+
         <div>
+            
             <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
                 <svg class="w-3 h-3 text-gray-500 dark:text-gray-400 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>
@@ -62,6 +27,7 @@ mysqli_close($conn);
                 </svg>
             </button>
             <!-- Dropdown menu -->
+            <a type="button" href="admin_product/add_product.html" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add</a>
             <div id="dropdownRadio" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
                 <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
                     <li>
@@ -173,9 +139,9 @@ mysqli_close($conn);
                     echo $row["description"];
                     echo "</td>";
                     echo "<td class='px-6 py-4'>";
-                    echo "<a href='update_product.php?product_id=" . $row["id"] . "' class='font-medium text-blue-600 dark:text-blue-500 hover:underline'>Edit</a>";
+                    echo "<a href='admin_product\update_product.php?product_id=" . $row["id"] . "' class='font-medium text-blue-600 dark:text-blue-500 hover:underline'>Edit</a>";
                     echo "<br>";
-                    echo "<a href='#' class='font-medium text-red-600 dark:text-red-500 hover:underline' onclick='confirmDelete(" . $row["id"] . ")'>Del</a>";
+                    echo "<a href='#' class='font-medium text-red-600 dark:text-red-500 hover:underline' onclick='confirmDelete(" . $row["id"] . ", event)'>Del</a>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -192,12 +158,46 @@ mysqli_close($conn);
         </tbody>
     </table>
     <script>
-    function confirmDelete(productId) {
-        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
-            window.location.href = "/DA1/api/del_product.php?product_id=" + productId;
-        }
-    }
-</script>
+        function confirmDelete(productId, event) {
+  event.preventDefault();
+
+  var alertHtml = `
+    <div id="alert-additional-content-1" class="p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
+      <div class="flex items-center">
+        <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span class="sr-only">Info</span>
+        <h3 class="text-lg font-medium">Bạn có chắc chắn muốn xóa sản phẩm này không?</h3>
+      </div>
+      <div class="flex">
+        <button type="button" class="text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="performDeletion(${productId})">
+          Có
+        </button>
+        <button type="button" class="text-blue-800 bg-transparent border border-blue-800 hover:bg-blue-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-blue-600 dark:border-blue-600 dark:text-blue-400 dark:hover:text-white dark:focus:ring-blue-800" onclick="dismissAlert('alert-additional-content-1')">
+          Không
+        </button>
+      </div>
+    </div>
+  `;
+
+  var alertContainer = document.getElementById('alert-container');
+  alertContainer.innerHTML = alertHtml;
+}
+
+function performDeletion(productId) {
+  window.location.href = "admin_product/del_product.php?id=" + productId;
+}
+
+function dismissAlert(alertId) {
+  var alertElement = document.getElementById(alertId);
+  if (alertElement) {
+    alertElement.remove();
+  }
+}
+
+
+    </script>
 
 </div>
 

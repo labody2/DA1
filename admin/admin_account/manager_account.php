@@ -1,51 +1,6 @@
-<?php
-// Kết nối cơ sở dữ liệu và thực hiện câu truy vấn
-include 'C:\Users\dungv\Documents\Dự án 1\DA1\api\connect.php';
-
-// Kiểm tra thông tin session
-session_start();
-if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
-
-    // Truy vấn để lấy vai trò từ username
-    $sql = "SELECT role FROM users WHERE username = '$username'";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $role = $row['role'];
-
-        if ($role === 'admin') {
-            // Người dùng có vai trò "admin", cho phép truy cập vào file "admin.php"
-        } else {
-            // Người dùng không có quyền truy cập, hiển thị thông báo hoặc chuyển hướng đến trang khác
-            echo "Bạn không có quyền truy cập vào trang này.";
-            // Hoặc:
-            // header("Location: ../signin_signup/signin.php");
-            exit();
-        }
-    } else {
-        // Không tìm thấy thông tin người dùng, xử lý tương ứng
-        echo "Bạn không có quyền truy cập vào trang này.";
-        echo"2";
-            exit();
-    }
-} else {
-    echo "Bạn không có quyền truy cập vào trang này.";
-    echo"1";
-    exit();
-    // Người dùng chưa đăng nhập, xử lý tương ứng
-}
-
-// Đóng kết nối
-mysqli_close($conn);
-?>
-
-
-<?php
-// Include file kết nối database
-include 'C:\Users\dungv\Documents\Dự án 1\DA1\api\connect.php';
-
+<?php 
+include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
+include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
 // Lấy danh sách tài khoản người dùng
 $sql = "SELECT * FROM users";
 $result = mysqli_query($conn, $sql);
@@ -154,7 +109,7 @@ $result = mysqli_query($conn, $sql);
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
                                     <div class="h-2.5 w-2.5 rounded-full ' . (($row["status"] == true) ? 'bg-green-500' : 'bg-red-500') . ' mr-2"></div>
-                                    ' . (($row["status"] == true) ? 'Online' : 'Offline') . '
+                                    ' . (($row["status"] == true) ? 'Khả dụng' : 'Vô hiệu') . '
                                 </div>
                             </td>
                         ';
@@ -164,10 +119,16 @@ $result = mysqli_query($conn, $sql);
                         </td>
                         ';
                         echo '
-                        <td class="px-6 py-4">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
-                        </td>
-                        ';
+                        <td class="px-6 py-4">';
+                        if ($row["status"] == true) {
+                            echo '<a href="admin_account/update_status.php?id=' . $row["id"] . '&status=1" class="lock-button text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Khóa</a>';
+                        } else {
+                            echo '<a href="admin_account/update_status.php?id=' . $row["id"] . '&status=0" class="lock-button text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Mở khóa</a>';
+                        }                        
+                        echo '
+                        </td>';
+                        
+                        
                     echo'</tr>';
                     }
                 } else {
@@ -187,5 +148,8 @@ $result = mysqli_query($conn, $sql);
             }
         }
     </script>
+
+
+
 </body>
 </html>

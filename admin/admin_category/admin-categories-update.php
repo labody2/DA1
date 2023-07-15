@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (mysqli_query($conn, $sql)) {
         // Cập nhật giá trị của biến toàn cục
         $GLOBALS['message'] = "Thông tin category đã được cập nhật thành công!";
+        
     } else {
         $GLOBALS['message'] = "Lỗi: " . mysqli_error($conn);
     }

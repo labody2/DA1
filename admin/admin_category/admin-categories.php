@@ -7,11 +7,11 @@
 </head>
 <body>
 <?php include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
-// include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
+include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
 ?>
 
 <div id="editForm" class="inset-0 bg-white dark:bg-gray-700 z-50" style="display: none">
-    <form id="categoryForm" action="update_categoryries-update.php" method="POST">
+    <form id="categoryForm" action="admin-categories-update.php" method="POST">
         <input type="hidden" name="category_id" id="category_id">
         <label for="category_name">Category Name:</label>
         <input type="text" name="category_name" id="category_name">
@@ -153,7 +153,6 @@
         var categoryRow = document.getElementById('category_' + categoryId);
         var categoryName = categoryRow.cells[2].innerText;
         
-        form.setAttribute('action', 'update_category.php');
         document.getElementById('category_id').value = categoryId;
         categoryNameInput.value = categoryName;
         
