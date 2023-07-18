@@ -144,29 +144,6 @@ include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
     </table>
 
     <script>
-    function confirmDelete(categoryId) {
-        if (confirm("Bạn có chắc chắn muốn xóa danh mục này?")) {
-            window.location.href = "/DA1/api/del_category.php?category_id=" + categoryId;
-        }
-    }
-    function showEditForm(categoryId) {
-        var form = document.getElementById('categoryForm');
-        var categoryNameInput = document.getElementById('category_name');
-        var categoryRow = document.getElementById('category_' + categoryId);
-        var categoryName = categoryRow.cells[2].innerText;
-        
-        document.getElementById('category_id').value = categoryId;
-        categoryNameInput.value = categoryName;
-        
-        document.getElementById('editForm').style.display = 'block';
-    }
-    
-    // Prevent default event when clicking on a link
-    document.querySelectorAll('.edit-link').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-        });
-    });
     </script>
 
 </div>

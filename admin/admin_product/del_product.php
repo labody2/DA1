@@ -13,7 +13,10 @@ if (isset($_GET["id"])) {
         // Xóa sản phẩm từ cơ sở dữ liệu
         $sql = "DELETE FROM products WHERE id = $productId";
         if (mysqli_query($conn, $sql)) {
-            echo "Sản phẩm đã được xóa thành công!";
+            $message = "Xóa sản phẩm thành công!";
+            echo "<script>alert('$message');</script>";
+            header("Location: ../admin-layout.php");
+            exit(); 
         } else {
             echo "Lỗi: " . mysqli_error($conn);
         }
