@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<?php include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
+<?php 
 include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
 ?>
 
@@ -99,10 +99,12 @@ include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
         </thead>
         <tbody>
             <?php
-            //get_products
+            include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
             $sql = "SELECT * FROM categories";
             $result = mysqli_query($conn, $sql);
-
+            if (!$result) {
+                die("Lỗi truy vấn SQL: " . mysqli_error($conn));
+            }
             if (mysqli_num_rows($result) > 0) {
                 // Duyệt qua từng hàng kết quả
                 while ($row = mysqli_fetch_assoc($result)) {

@@ -1,9 +1,9 @@
 <?php
+
 include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
-?>
-?php include 'C:\Users\dungv\Documents\Dự án 1\DA1\api\connect.php';?>
+ ?>
 <?php
-// process.php
+include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
 
 // add_product
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,6 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($conn->query($sql) === TRUE) {
         echo "Product added successfully!";
+        header("Location: ../admin-layout.php");
+        exit(); 
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

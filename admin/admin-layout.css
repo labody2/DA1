@@ -1,0 +1,5 @@
+/* Thêm khung nền và chuyển đổi màu chữ khi hover vào mục menu */
+aside nav ul li a:hover {
+    background-color: #F3F4F6;
+    border-radius: 4px;
+  }
