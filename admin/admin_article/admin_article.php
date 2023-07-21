@@ -1,34 +1,62 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Trang bài báo</title>
+    <title>Danh sách bài báo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
-    
-    <?php
+    <h1>Danh sách bài báo</h1>
+    <a type="button" href="admin_article/admin_article_add.html" class="text-green bg-green-500 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tạo bài báo mới</a>
+    <table class="table-auto">
+        <thead>
+            <tr>
+                <th class="px-4 py-2">ID</th>
+                <th class="px-4 py-2">Thời gian tạo:</th>
+                <th class="px-4 py-2">Tiêu đề</th>
+                <th class="px-4 py-2">Tác giả</th>
+                <th class="px-4 py-2">Nội dung</th>
+                <th class="px-4 py-2">Hình ảnh</th>
+                <th class="px-4 py-2">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Include file controller để sử dụng các hàm xử lý
+            include 'C:\Users\dungv\Desktop\DA1\controller_admin\controller_admin_article.php';
+            include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
+            // Lấy danh sách các bài báo từ cơ sở dữ liệu
+            $articles = getArticles($conn);
 
-    // Kết nối cơ sở dữ liệu và thực hiện câu truy vấn
-    include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
-    $sql = "SELECT * FROM article";
-    $result = mysqli_query($conn, $sql);
-    // Kiểm tra kết quả truy vấn
-    if (mysqli_num_rows($result) > 0) {
-        // Hiển thị danh sách bài báo
-        while ($row = mysqli_fetch_assoc($result)) {
-            $title = $row['title'];
-            $content = $row['content'];
-            $image = 'images/' . $row['image']; // Đường dẫn tới thư mục images
-
-            echo '<h2>' . $title . '</h2>';
-            echo '<p>' . $content . '</p>';
-            echo '<img src="' . $image . '" alt="Hình ảnh">';
-        }
-    } else {
-        echo 'Không có bài báo nào.';
-    }
-
-    // Đóng kết nối
-    mysqli_close($conn);
-    ?>
+            foreach ($articles as $article) :
+            ?>
+                <tr>
+                    <td class="border px-4 py-2"><?= $article['id'] ?></td>
+                    <td class="border px-4 py-2"><?= $article['create_time'] ?></td>
+                    <td class="border px-4 py-2"><?= $article['title'] ?></td>
+                    <td class="border px-4 py-2"><?= $article['author'] ?></td>
+                    <td class="border px-4 py-2"><?= $article['content'] ?></td>
+                    <td class="border px-4 py-2">
+                        <?php
+                        $imageString = $article['images'];
+                        // Tách các đường dẫn ảnh thành mảng
+                        $imagePaths = explode(",", $imageString);
+                        // Hiển thị các ảnh trong trang web
+                        foreach ($imagePaths as $imagePath) {
+                            echo '<img src="' . $imagePath . '" alt="Image" width="200">';
+                        }
+                        ?>
+                    </td>
+                 
+                    <td class="border px-4 py-2">
+                        <a href="/admin/admin_article/admin_article_update.php?id=<?= $article['id'] ?>&action=update" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sửa</a>
+                        <a href="/controller_admin/controller_admin_article.php?id=<?= $article['id'] ?>&action=delete" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="return confirm('Bạn có chắc chắn muốn xóa bài báo này?')">Xóa</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </body>
+
 </html>

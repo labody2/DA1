@@ -21,17 +21,19 @@ if (isset($_SESSION['username'])) {
             // Người dùng không có quyền truy cập, hiển thị thông báo hoặc chuyển hướng đến trang khác
             echo "Bạn không có quyền truy cập vào trang này.";
             // Hoặc:
-            // header("Location: ../signin_signup/signin.php");
+            header("Location: /view/signin_signup/signin.php");
             exit();
         }
     } else {
         // Không tìm thấy thông tin người dùng, xử lý tương ứng
         echo "Bạn không có quyền truy cập vào trang này.";
+        header("Location: /view/signin_signup/signin.php");
         echo"2";
             exit();
     }
 } else {
     echo "Bạn không có quyền truy cập vào trang này.";
+    header("Location: /view/signin_signup/signin.php");
     exit();
     // Người dùng chưa đăng nhập, xử lý tương ứng
 }

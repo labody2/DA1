@@ -331,13 +331,21 @@ include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
             $total_products = 0;
         }
 
-        $sql_articles = "SELECT COUNT(*) AS total_articles FROM articles";
+        $sql_articles = "SELECT COUNT(*) AS total_articles FROM article";
         $result_articles = mysqli_query($conn, $sql_articles);
         if ($result_articles) {
             $row_articles = mysqli_fetch_assoc($result_articles);
             $total_articles = $row_articles['total_articles'];
         } else {
             $total_articles = 0;
+        }
+        $sql_categories = "SELECT COUNT(*) AS total_categories FROM categories";
+        $result_categories = mysqli_query($conn, $sql_categories);
+        if ($result_categories) {
+            $row_categories = mysqli_fetch_assoc($result_categories);
+            $total_categories = $row_categories['total_categories'];
+        } else {
+            $total_categories = 0;
         }
         ?>
       <div class="grid grid-cols-4 gap-4">
@@ -347,18 +355,18 @@ include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
           </div>
           
           <div class="bg-white rounded shadow p-4">
-            <h2 class="text-xl font-semibold text-gray-800">Orders</h2>
+            <h2 class="text-xl font-semibold text-gray-800">Products</h2>
             <p class="text-gray-600"><?php echo "Tổng số product: " . $total_products; ?></p>
           </div>
           
           <div class="bg-white rounded shadow p-4">
-            <h2 class="text-xl font-semibold text-gray-800">Products</h2>
+            <h2 class="text-xl font-semibold text-gray-800">Articles</h2>
             <p class="text-gray-600"><?php echo "Tổng số article: " . $total_articles; ?></p>
           </div>
           
           <div class="bg-white rounded shadow p-4">
-            <h2 class="text-xl font-semibold text-gray-800">Revenue</h2>
-            <p class="text-gray-600">Total revenue: $10,000</p>
+            <h2 class="text-xl font-semibold text-gray-800">Category</h2>
+            <p class="text-gray-600"> <?php echo "Tổng số category: " . $total_categories; ?></p>
           </div>
         </div>
         <div id="content"></div>

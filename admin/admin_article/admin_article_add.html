@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thêm bài báo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <h1>Thêm bài báo</h1>
+    <form action="/controller_admin/controller_admin_article.php" method="post" enctype="multipart/form-data">
+        <div class="relative mb-3 border rounded-md border-gray-300 p-2">
+            <input
+              type="text" id="title" name="title" required
+              class="peer block w-full bg-transparent px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear focus:ring-primary focus:border-primary dark:text-white"
+              placeholder="Tiêu đề"
+            />
+            <label
+              for="title"
+              class="pointer-events-none absolute left-3 top-2 text-gray-500 transition-all duration-200 ease-out"
+            >
+             
+            </label>
+          </div>
+          
+        
+          <div class="relative mb-3" data-te-input-wrapper-init>
+
+            <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nội dung:</label>
+            <textarea id="content" name="content" rows="6" required class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Việt nội dung vào đây..."></textarea>
+            
+</div>
+
+        <div class="mb-3">
+            <label
+              for="formFileMultiple"
+              class="mb-2 inline-block text-neutral-700 dark:text-neutral-200"
+              >Ảnh</label
+            >
+            <input
+                class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
+                type="file"
+                id="image"
+                name="image[]"
+                accept="image/*"
+                multiple
+            />
+
+        </div>
+        
+        <button type="submit" name="add" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Thêm bài báo</button>
+    </form>
+</body>
+</html>
