@@ -382,50 +382,6 @@ include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
     </div>
     </div>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var dashboardLink = document.querySelector('#dashboardLink');
-      var usersLink = document.querySelector('#usersLink');
-      var categoryLink = document.querySelector('#categoryLink');
-      var articleLink = document.querySelector('#articleLink');
-      var articleCategoryLink = document.querySelector('#articleCategoryLink');
-      var content = document.querySelector('#content');
-
-      function includeContent(file) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', file, true);
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            content.innerHTML = xhr.responseText;
-          }
-        };
-        xhr.send();
-      }
-
-      dashboardLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        includeContent('admin_product/admin-controlpanel.php');
-      });
-
-      usersLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        includeContent('admin_account/manager_account.php');
-      });
-
-      categoryLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        includeContent('admin_category/admin-categories.php');
-      });
-
-      articleLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        includeContent('admin_article/admin_article.php');
-      });
-
-      articleCategoryLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        includeContent('article-category.php');
-      });
-    });
     // Trong script của trang trước đó (admin-layout.php), sau khi load trang, thêm mã sau để tự động load lại trang
     window.addEventListener('load', function() {
         if (window.history.replaceState) {

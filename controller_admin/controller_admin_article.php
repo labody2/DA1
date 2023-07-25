@@ -1,5 +1,5 @@
 <?php
-include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
+require_once 'C:\Users\dungv\Desktop\DA1\admin\start_session.php';
 include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
 //admin-article
 function getArticles($conn)
@@ -35,7 +35,7 @@ function deleteArticle($conn, $articleId)
     $sql = "DELETE FROM article WHERE id = $articleId";
     if (mysqli_query($conn, $sql) === TRUE) {
         echo "Xóa bài báo thành công!";
-        header("Location: /admin/admin-layout.php");
+        echo "<script>window.location.href = '/admin/admin_control.php?link=article';</script>";
     } else {
         echo "Lỗi: " . $sql . "<br>" . mysqli_error($conn);
     }
@@ -89,7 +89,8 @@ function processForm($conn, $title, $content, $imageFiles)
             $sql = "INSERT INTO article (title, author, content, images, create_time) VALUES ('$title', '$author', '$content', '$imageText', '$currentTime')";
             if ($conn->query($sql) === TRUE) {
                 echo "Thêm bài báo thành công!";
-                header("Location: /admin/admin-layout.php");
+                        echo "<script>window.location.href = '/admin/admin_control.php?link=article';</script>";
+                        exit;
             } else {
                 echo "Lỗi: " . $sql . "<br>" . $conn->error;
             }
@@ -111,6 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $articleId=$_POST["articleId"];
         // Thực hiện hành động sửa bài báo
         updateArticle($conn, $articleId, $title, $content, $imageFiles);
+        
     } elseif (isset($_POST["add"])) {
         // Thực hiện hành động xóa bài báo
         processForm($conn, $title, $content, $imageFiles);
@@ -180,7 +182,7 @@ function updateArticle($conn, $articleId, $title, $content, $imageFiles)
 
                 if ($conn->query($sql) === TRUE) {
                     echo "Cập nhật bài báo thành công!";
-                    header("Location: /admin/admin-layout.php");
+                    echo "<script>window.location.href = '/admin/admin_control.php?link=article';</script>";
                 } else {
                     echo "Lỗi: " . $sql . "<br>" . $conn->error;
                 }
@@ -193,7 +195,7 @@ function updateArticle($conn, $articleId, $title, $content, $imageFiles)
 
             if ($conn->query($sql) === TRUE) {
                 echo "Cập nhật bài báo thành công!";
-                header("Location: /admin/admin-layout.php");
+                echo "<script>window.location.href = '/admin/admin_control.php?link=article';</script>";
             } else {
                 echo "Lỗi: " . $sql . "<br>" . $conn->error;
             }

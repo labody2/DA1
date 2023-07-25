@@ -8,7 +8,7 @@
 
 <body>
     <h1>Danh sách bài báo</h1>
-    <a type="button" href="admin_article/admin_article_add.html" class="text-green bg-green-500 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tạo bài báo mới</a>
+    <a type="button" href="/admin/admin_control.php?link=article-add" class="text-green bg-green-500 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tạo bài báo mới</a>
     <table class="table-auto">
         <thead>
             <tr>
@@ -50,8 +50,8 @@
                     </td>
                  
                     <td class="border px-4 py-2">
-                        <a href="/admin/admin_article/admin_article_update.php?id=<?= $article['id'] ?>&action=update" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sửa</a>
-                        <a href="/controller_admin/controller_admin_article.php?id=<?= $article['id'] ?>&action=delete" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="return confirm('Bạn có chắc chắn muốn xóa bài báo này?')">Xóa</a>
+                        <a href="/admin/admin_control.php?link=article-edit&&id=<?= $article['id'] ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sửa</a>
+                        <a href="/admin/admin_control.php?link=article-del&&id=<?= $article['id'] ?>&action=delete" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="return confirm('Bạn có chắc chắn muốn xóa bài báo này?')">Xóa</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

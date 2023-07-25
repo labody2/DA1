@@ -1,5 +1,5 @@
 <?php
-include 'C:\Users\dungv\Desktop\DA1\admin\checkpermission.php';
+
 include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,10 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Gọi hàm updateProduct để cập nhật thông tin sản phẩm trong cơ sở dữ liệu
         if (updateProduct($conn, $productId, $name, $price, $description)) {
             echo "Thông tin sản phẩm đã được cập nhật thành công!";
-            header("Location: /admin/admin-layout.php");
+            header("Location: /admin/admin_control.php?link=dashboard");  
         } else {
             echo "Lỗi: Không thể cập nhật thông tin sản phẩm!";
-            header("Location: /admin/admin-layout.php");
+            header("Location: /admin/admin_control.php?link=dashboard");  
         }
         exit();
     }
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST["description"];
     // Gọi hàm addProduct để thêm sản phẩm vào cơ sở dữ liệu
     if (addProduct($conn, $name, $price, $description)) {
-        header("Location: /admin/admin-layout.php");
+        header("Location: /admin/admin_control.php?link=dashboard");  
         exit();
     } else {
         echo "Error: Unable to add product!";
@@ -41,7 +41,7 @@ if (isset($_GET["id"])) {
         if (deleteProduct($conn, $productId)) {
             $message = "Xóa sản phẩm thành công!";
             echo "<script>alert('$message');</script>";
-            header("Location: /admin/admin-layout.php");
+            echo "<script>window.location.href = '/admin/admin_control.php?link=dashboard';</script>";
             exit();
         } else {
             echo "Lỗi: Không thể xóa sản phẩm!";
@@ -78,7 +78,7 @@ function getProductById($conn, $productId)
     $result = $conn->query($sql);
     if ($result->num_rows == 1) {
         return $result->fetch_assoc();
-        header("Location: /admin/admin-layout.php");    
+        header("Location: /admin/admin_control.php?link=dashboard");     
     } else {
         return null;
     }
@@ -93,9 +93,11 @@ function deleteProduct($conn, $productId)
         if (mysqli_query($conn, $sql)) {
             return true;
         } else {
+            echo"false";
             return false;
         }
     } else {
+        echo"false";
         return false;
     }
 }

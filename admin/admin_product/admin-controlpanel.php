@@ -14,7 +14,7 @@
 
         <div>
             <!-- Dropdown menu -->
-            <a type="button" href="admin_product/add_product.html" class="text-black bg-green-500 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add</a>
+            <a type="button" href="/admin/index.php?link=dashboard-add" class="text-black bg-green-500 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add</a>
             <div id="dropdownRadio" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
             </div>
         </div>
@@ -83,18 +83,18 @@
                         <?= $product["create_time"] ?>
                     </td>
                     <td class="px-6 py-4">
-                        <?= $product["category"] ?>
+                        <?= $product["categoryId"] ?>
                     </td>
                     <td class="px-6 py-4">
-                        $<?= $product["price"] ?>
+                        <?= $product["price"] ?>đ
                     </td>
                     <td class="px-6 py-4">
                         <?= $product["description"] ?>
                     </td>
                     <td class="px-6 py-4">
-                         <a href="/admin/admin_product/update_product.php?product_id=<?= $product['id'] ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Sửa</a>
+                         <a href="/admin/admin_control.php?link=dashboard-edit&&product_id=<?= $product['id'] ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Sửa</a>
                         <br>
-                        <a href="/controller_admin/controller_admin_product.php?id=<?= $product['id'] ?>&action=del" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xóa</a>
+                        <a href="/admin/admin_control.php?link=dashboard-del&&id=<?= $product['id'] ?>&action=del" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">Xóa</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
