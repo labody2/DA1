@@ -108,7 +108,7 @@
                                 <ul>
                                     <li class=""><a href="../page/index.php">Trang chủ</a>
                                     </li>
-                                    <li class=""><a href="about.html">Về chúng tôi</a>
+                                    <li class=""><a href="about.php">Về chúng tôi</a>
                                     </li>
                                     <li class=""><a href="../page/shop.php">Nhà đất</a>
                                     </li>
