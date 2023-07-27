@@ -54,11 +54,14 @@ function getUserDetail($conn, $username)
 
 
 // Function to add a new user
-function addUser($conn, $username, $password, $status, $role)
+function addUser($conn, $username, $password)
 {
     $currentTime = date("Y-m-d H:i:s");
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO users (username, password, create_time, status, role) VALUES ('$username', '$hashedPassword', '$currentTime', '$status', '$role')";
+    // Giá trị mặc định cho role và status
+    $role = "admin";
+    $status = true;
+
+    $sql = "INSERT INTO users (username, password, create_time, status, role) VALUES ('$username', '$password', '$currentTime', $status, '$role')";
     if ($conn->query($sql) === TRUE) {
         echo "Thêm người dùng thành công!";
         echo "<script>window.location.href = '/admin/admin_control.php?link=users';</script>"; 
@@ -134,14 +137,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $status = $_POST["status"];
-    $role = $_POST["role"];
-
     if (isset($_POST["update"])) {
+        $status = $_POST["status"];
+        $role = $_POST["role"];
         $userId = $_POST["user_id"];
         updateUser($conn, $userId, $username, $password, $status, $role);
     } elseif (isset($_POST["add"])) {
-        addUser($conn, $username, $password, $status, $role);
+        addUser($conn, $username, $password);
     }
 }
 

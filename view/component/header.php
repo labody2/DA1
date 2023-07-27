@@ -4,8 +4,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
+    <!-- Font Icons css -->
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <!-- plugins css -->
+    <link rel="stylesheet" href="../css/plugins.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
+    <?php
+
+        include 'C:\Users\dungv\Desktop\DA1\admin\start_session.php';
+        $loggedIn = isset($_SESSION["username"]);
+    ?>
   <header class="ltn__header-area ltn__header-5 ltn__header-transparent--- gradient-color-4---">
     <!-- ltn__header-top-area start -->
     <div class="ltn__header-top-area section-bg-6 top-area-color-white---">
@@ -92,13 +106,13 @@
                         <nav>
                             <div class="ltn__main-menu">
                                 <ul>
-                                    <li class=""><a href="#">Trang chủ</a>
+                                    <li class=""><a href="../page/index.php">Trang chủ</a>
                                     </li>
                                     <li class=""><a href="about.html">Về chúng tôi</a>
                                     </li>
-                                    <li class=""><a href="shop.html">Nhà đất</a>
+                                    <li class=""><a href="../page/shop.php">Nhà đất</a>
                                     </li>
-                                    <li class=""><a href="blog.html">Tin tức</a>
+                                    <li class=""><a href="../page/article-card.php">Tin tức</a>
                                     </li>
                                     <li><a href="contact.html">Liên hệ</a></li>
                                 </ul>
@@ -130,10 +144,15 @@
                             <li>
                                 <a href="#"><i class="icon-user"></i></a>
                                 <ul>
-                                    <li><a href="/view/signin_signup/signin.php">Sign in</a></li>
-                                    <li><a href="/view/signin_signup/signup.php">Register</a></li>
-                                    <li><a href="account.html">My Account</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
+                                    <?php if ($loggedIn): ?>
+                                        <!-- Nếu session tồn tại, hiển thị các liên kết My Account và Wishlist -->
+                                        <li><a href="account.html"><?php echo $_SESSION["username"] ?></a></li>
+                                        <li><a href="wishlist.html">Wishlist</a></li>
+                                    <?php else: ?>
+                                        <!-- Nếu session không tồn tại, hiển thị các liên kết Sign in và Register -->
+                                        <li><a href="/view/signin_signup/signin.php">Sign in</a></li>
+                                        <li><a href="/view/signin_signup/signup.php">Register</a></li>
+                                    <?php endif; ?>
                                 </ul>
                             </li>
                         </ul>

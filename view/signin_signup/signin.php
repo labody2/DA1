@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Đăng nhập thành công, lưu thông tin vào session và chuyển hướng đến trang chính
         $_SESSION["loggedin"] = true;
         $_SESSION["username"] = $username;
-        echo $_SESSION["username"];
+        echo "<script>window.location.href = '/view/index.php';</script>";
     } else {
         // Đăng nhập không thành công, hiển thị thông báo lỗi
         $errorMsg = "Tên đăng nhập hoặc mật khẩu không chính xác!";

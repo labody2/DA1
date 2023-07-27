@@ -35,7 +35,7 @@
 
     <!-- HEADER AREA START (header-5) -->
     <?php
-    include 'C:\Users\dungv\Desktop\DA1\view\component\header.html';
+    include 'C:\Users\dungv\Desktop\DA1\view\component\header.php';
     ?>
     <!-- HEADER AREA END -->
 

@@ -354,6 +354,10 @@
             include 'admin_account/manager_account.php';
             break;
             
+            case 'users-add-admin':
+            include 'admin_account/add_admin_account.php';
+            break;
+
             case 'users-change-status':
             include 'C:\Users\dungv\Desktop\DA1\controller_admin\controller_admin_account.php';
             break;

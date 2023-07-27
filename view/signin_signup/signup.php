@@ -127,11 +127,7 @@ mysqli_close($conn);
             >
               Welcome to Squid 🦑
             </h1>
-  
-            <p class="mt-4 leading-relaxed text-gray-500">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-              nam dolorum aliquam, quibusdam aperiam voluptatum.
-            </p>
+
           </div>
         <h1 style="text-align: center;font-size:40px;">Đăng kí</h1>
           <form action="" method="POST" class="mt-8 grid grid-cols-6 gap-6">
@@ -243,6 +239,16 @@ mysqli_close($conn);
       </main>
     </div>
   </section>
+  <script>
+  // Kiểm tra xem biến $successMsg có giá trị hay không
+  var successMsg = <?php echo json_encode($successMsg); ?>;
+  if (successMsg) {
+    // Chờ 3 giây và sau đó chuyển hướng về trang khác
+    setTimeout(function() {
+      window.location.href = '/view/signin_signup/signin.php'; // Thay đổi địa chỉ trang web muốn chuyển đến ở đây
+    }, 2000);
+  }
+</script>
 </body>
 </html>
 

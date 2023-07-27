@@ -3,11 +3,14 @@
 <head>
     <title>Danh sách bài báo</title>
     <link rel="stylesheet" href="https://cdn.tailwindcss.com/2.2.7/tailwind.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+    <?php
+    include 'C:\Users\dungv\Desktop\DA1\view\component\header.php';
+    ?>
     <h1 class="text-3xl font-bold mb-5">Danh sách bài báo</h1>
     <a type="button" href="admin_article/admin_article_add.html" class="text-green-700 bg-green-300 hover:bg-green-400 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-5">Tạo bài báo mới</a>
-
     <div class="grid grid-cols-3 gap-4">
         <?php
         // Kết nối đến cơ sở dữ liệu
@@ -40,6 +43,8 @@
         mysqli_close($conn);
         ?>
     </div>
-
+        <?php
+        include 'C:\Users\dungv\Desktop\DA1\view\component\footer.html';
+        ?>
 </body>
 </html>

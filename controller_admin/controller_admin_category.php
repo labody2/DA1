@@ -15,6 +15,18 @@ function getCategories($conn)
     }
     return $categories;
 }
+function getCategoryById($conn, $categoryId)
+{
+    $sql = "SELECT * FROM categories WHERE categoryId = $categoryId";
+    $result = $conn->query($sql);
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        return $row;
+    } else {
+        return null;
+    }
+}
+
 
 function getCategoryDetail($conn, $categoryId)
 {
