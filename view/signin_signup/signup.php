@@ -9,7 +9,11 @@
 <body>
 <?php
 include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
-
+session_start(); // Bắt đầu phiên làm việc
+if (isset($_SESSION["username"])) {
+  header("Location: /view/page/index.php");
+  exit;
+}
 // Khởi tạo biến lưu thông báo lỗi
 $errorMsg = "";
 
@@ -212,16 +216,6 @@ mysqli_close($conn);
               </label>
             </div>
   
-            <div class="col-span-6">
-              <p class="text-sm text-gray-500">
-                By creating an account, you agree to our
-                <a href="#" class="text-gray-700 underline">
-                  terms and conditions
-                </a>
-                and
-                <a href="#" class="text-gray-700 underline">privacy policy</a>.
-              </p>
-            </div>
   
             <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
               <button type="submit" value="Register"

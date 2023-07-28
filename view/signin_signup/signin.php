@@ -1,6 +1,9 @@
 <?php
 session_start(); // Bắt đầu phiên làm việc
-
+if (isset($_SESSION["username"])) {
+  header("Location: /view/page/index.php");
+  exit;
+}
 include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
 
 // Khởi tạo biến lưu thông báo lỗi
@@ -19,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Đăng nhập thành công, lưu thông tin vào session và chuyển hướng đến trang chính
         $_SESSION["loggedin"] = true;
         $_SESSION["username"] = $username;
-        echo "<script>window.location.href = '/view/index.php';</script>";
+        echo "<script>window.location.href = '/view/page/index.php';</script>";
     } else {
         // Đăng nhập không thành công, hiển thị thông báo lỗi
         $errorMsg = "Tên đăng nhập hoặc mật khẩu không chính xác!";

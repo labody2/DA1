@@ -2,35 +2,33 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Thêm sản phẩm mới</title>
+    <title>Đăng bất động sản</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1>Thêm sản phẩm mới</h1>
-    <form action="process_add_product.php" method="post">
-        <br>
-        <label for="categoryId">Danh mục:</label>
-        <input type="number" id="categoryId" name="categoryId" required>
-        <br>
-        <label for="img1">Link hình ảnh:</label>
-        <input type="text" id="img1" name="img1" required>
-        <br>
-        <label for="other_room">Số phòng khác:</label>
-        <input type="number" id="other_room" name="other_room" required>
-        <br>
-        <label for="bathroom">Số phòng tắm:</label>
-        <input type="number" id="bathroom" name="bathroom" required>
-        <br>
-        <label for="square">Diện tích:</label>
-        <input type="number" id="square" name="square" required>
-        <br>
-        <label for="accountId_post">ID tài khoản đăng:</label>
-        <input type="number" id="accountId_post" name="accountId_post" required>
-        <br>
-        <input type="submit" value="Thêm sản phẩm">
-    </form>
-    <!-- component -->
-<section class="bg-white dark:bg-gray-900">
+<div id="categoryWarning" style="color: red;fixed; top: 0; right: 0;display:none ; position:fixed;" role="alert" class="rounded border-s-4 border-red-500 bg-red-50 p-4">
+  <div class="flex items-center gap-2 text-red-800">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      class="h-5 w-5"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+        clip-rule="evenodd"
+      />
+    </svg>
+
+    <strong class="block font-medium"> Có lỗi xảy ra </strong>
+  </div>
+
+  <p class="mt-2 text-sm text-red-700">
+  Vui lòng chọn loại BĐS bạn muốn đăng trước khi đăng BĐS!
+  </p>
+</div>
+<form class="bg-white dark:bg-gray-900" action="/controller/controller_product.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
         <div class=" items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
             <div class="w-full">
                 <div class="mt-6">
@@ -44,7 +42,6 @@
                        include 'C:\Users\dungv\Desktop\DA1\controller\controller_category.php';
                         // Gọi hàm getCategories để lấy danh sách các categories
                         $categories = getCategories($conn);
-
                         // Duyệt qua từng category và in ra các button tương ứng
                         foreach ($categories as $category) {
                             $categoryId = $category['id'];
@@ -84,7 +81,12 @@
                                     button.classList.add('clicked');
                                     categoryIdInput.value = categoryId;
                                     selectedCategoryId = categoryId;
+                                    if (categoryIdInput.value === '') {
+                                        const categoryWarning = document.getElementById('categoryWarning');
+                                        categoryWarning.style.display = 'block';
+                                    }   
                                 }
+                                event.preventDefault();
                             }
                         </script>
                     </div>
@@ -185,6 +187,7 @@
                             </button>
 
                             <input
+                                name="bed_room"
                                 type="number"
                                 id="Quantity"
                                 value="1"
@@ -210,6 +213,7 @@
                             </button>
 
                             <input
+                                name="other_room"
                                 type="number"
                                 id="Quantity2"
                                 value="1"
@@ -235,6 +239,7 @@
                             </button>
 
                             <input
+                                name="bathroom"
                                 type="number"
                                 id="Quantity3"
                                 value="1"
@@ -344,6 +349,17 @@
                     </button>
                 </form>
             </div>
-</section>
+<script>
+                            function validateForm() {
+                                const categoryIdInput = document.getElementById('categoryIdInput');
+                                const categoryWarning = document.getElementById('categoryWarning');
+                                if (categoryIdInput.value === '') {
+                                    categoryWarning.style.display = 'block';
+                                    return false; // Ngăn không gửi form nếu chưa chọn danh mục
+                                }
+                                return true; // Gửi form nếu đã chọn danh mục
+                            }
+</script>
+</form>
 </body>
 </html>

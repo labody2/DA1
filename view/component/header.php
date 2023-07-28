@@ -37,23 +37,6 @@
                     <div class="top-bar-right text-end">
                         <div class="ltn__top-bar-menu">
                             <ul>
-                                <li class="d-none">
-                                    <!-- ltn__language-menu -->
-                                    <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
-                                        <ul>
-                                            <li><a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
-                                                <ul>
-                                                    <li><a href="#">Arabic</a></li>
-                                                    <li><a href="#">Bengali</a></li>
-                                                    <li><a href="#">Chinese</a></li>
-                                                    <li><a href="#">English</a></li>
-                                                    <li><a href="#">French</a></li>
-                                                    <li><a href="#">Hindi</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
                                 <li>
                                     <!-- ltn__social-media -->
                                     <div class="ltn__social-media">
@@ -69,7 +52,7 @@
                                 <li>
                                     <!-- header-top-btn -->
                                     <div class="header-top-btn">
-                                        <a href="add-listing.html">Add Listing</a>
+                                        <a href="/view/page/add_listing.php">Add Listing</a>
                                     </div>
                                 </li>
                             </ul>
@@ -152,6 +135,9 @@
                                         <!-- Nếu session không tồn tại, hiển thị các liên kết Sign in và Register -->
                                         <li><a href="/view/signin_signup/signin.php">Sign in</a></li>
                                         <li><a href="/view/signin_signup/signup.php">Register</a></li>
+                                    <?php endif; ?>
+                                    <?php if ($loggedIn): ?>
+                                        <li><a href="/view/signin_signup/log_out.php">Đăng xuất</a></li>
                                     <?php endif; ?>
                                 </ul>
                             </li>
