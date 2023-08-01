@@ -16,9 +16,12 @@
 </head>
 <body>
     <?php
-
         include 'C:\Users\dungv\Desktop\DA1\admin\start_session.php';
+        include 'C:\Users\dungv\Desktop\DA1\controller\controller_account.php';
+        include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
+        include 'C:\Users\dungv\Desktop\DA1\controller\controller_category.php';
         $loggedIn = isset($_SESSION["username"]);
+        $categories = getCategories($conn);
     ?>
   <header class="ltn__header-area ltn__header-5 ltn__header-transparent--- gradient-color-4---">
     <!-- ltn__header-top-area start -->
@@ -93,8 +96,13 @@
                                     </li>
                                     <li class=""><a href="about.php">Về chúng tôi</a>
                                     </li>
-                                    <li class=""><a href="../page/shop.php">Nhà đất</a>
-                                    </li>
+                                    <li class="menu-icon"><a href="../page/shop.php">Nhà đất</a>
+                                    <ul>
+                                        <?php foreach ($categories as $category) : ?>                                  
+                                            <li class="menu-icon"><a href="../page/shop.php"><?= $category['category_name'] ?></a></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                        </li>
                                     <li class=""><a href="../page/article-card.php">Tin tức</a>
                                     </li>
                                     <li><a href="contact.html">Liên hệ</a></li>
@@ -129,12 +137,17 @@
                                 <ul>
                                     <?php if ($loggedIn): ?>
                                         <!-- Nếu session tồn tại, hiển thị các liên kết My Account và Wishlist -->
-                                        <li><a href="account.html"><?php echo $_SESSION["username"] ?></a></li>
+                                        <li><a href=""><?php echo $_SESSION["username"] ?></a></li>
+                                        <?php
+                                        if (checkAdmin($conn,$_SESSION["username"])=='admin') {
+                                            echo '<li><a href="/admin/admin_control.php">Quản trị</a></li>';
+                                        }
+                                        ?>
                                         <li><a href="wishlist.html">Wishlist</a></li>
+                                        <li><a href="/view/page/product_own.php">BĐS đang bán</a></li>
                                     <?php else: ?>
-                                        <!-- Nếu session không tồn tại, hiển thị các liên kết Sign in và Register -->
-                                        <li><a href="/view/signin_signup/signin.php">Sign in</a></li>
-                                        <li><a href="/view/signin_signup/signup.php">Register</a></li>
+                                        <li><a href="/view/signin_signup/signin.php">Đăng nhập</a></li>
+                                        <li><a href="/view/signin_signup/signup.php">Đăng kí</a></li>
                                     <?php endif; ?>
                                     <?php if ($loggedIn): ?>
                                         <li><a href="/view/signin_signup/log_out.php">Đăng xuất</a></li>

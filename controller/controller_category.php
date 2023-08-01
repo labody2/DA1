@@ -14,13 +14,15 @@ function getCategories($conn)
 }
 function getCategoryById($conn, $categoryId)
 {
-    $sql = "SELECT * FROM categories WHERE categoryId = $categoryId";
+    $sql = "SELECT category_name FROM categories WHERE  id = '$categoryId'";
     $result = $conn->query($sql);
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        return $row;
+        return $row['category_name'];
     } else {
+        echo'null';
         return null;
     }
 }
+
 ?>

@@ -487,17 +487,17 @@
                             <ul class="ltn__list-item-2 ltn__list-item-2-before--- ltn__list-item-2-img mb-50">
                                 <li>
                                     <a href="img/img-slide/11.jpg" data-rel="lightcase:myCollection">
-                                        <img src="img/img-slide/11.jpg" alt="Image">
+                                        <img src="../img/img-slide/11.jpg" alt="Image">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="img/img-slide/12.jpg" data-rel="lightcase:myCollection">
-                                        <img src="img/img-slide/12.jpg" alt="Image">
+                                        <img src="../img/img-slide/12.jpg" alt="Image">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="img/img-slide/13.jpg" data-rel="lightcase:myCollection">
-                                        <img src="img/img-slide/13.jpg" alt="Image">
+                                        <img src="../img/img-slide/13.jpg" alt="Image">
                                     </a>
                                 </li>
                             </ul>
@@ -542,7 +542,7 @@
                         <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1 active">
                             <div class="ltn__feature-icon">
                                 <!-- <span><i class="flaticon-house-3"></i></span> -->
-                                <img src="img/icons/icon-img/22.png" alt="#">
+                                <img src="../img/icons/icon-img/22.png" alt="#">
                             </div>
                             <div class="ltn__feature-info">
                                 <h3><a href="service-details.html">Rent a home</a></h3>
@@ -555,10 +555,10 @@
                         <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
                             <div class="ltn__feature-icon">
                                 <!-- <span><i class="flaticon-deal-1"></i></span> -->
-                                <img src="img/icons/icon-img/23.png" alt="#">
+                                <img src="../img/icons/icon-img/23.png" alt="#">
                             </div>
                             <div class="ltn__feature-info">
-                                <h3><a href="service-details.html">Sell a home</a></h3>
+                                <h3><a href="../service-details.html">Sell a home</a></h3>
                                 <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
                                 <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a>
                             </div>
@@ -585,7 +585,7 @@
                     <div class="col-lg-12">
                         <div class="ltn__product-item ltn__product-item-4 text-center---">
                             <div class="product-img">
-                                <a href="product-details.html"><img src="img/product-3/1.jpg" alt="#"></a>
+                                <a href="product-details.html"><img src="../img/product-3/1.jpg" alt="#"></a>
                                 <div class="product-badge">
                                     <ul>
                                         <li class="sale-badge bg-green">For Rent</li>
@@ -635,7 +635,7 @@
                             <div class="product-info-bottom">
                                 <div class="real-estate-agent">
                                     <div class="agent-img">
-                                        <a href="team-details.html"><img src="img/blog/author.jpg" alt="#"></a>
+                                        <a href="team-details.html"><img src="../img/blog/author.jpg" alt="#"></a>
                                     </div>
                                     <div class="agent-brief">
                                         <h6><a href="team-details.html">William Seklo</a></h6>
@@ -667,7 +667,7 @@
                     <div class="col-lg-12">
                         <div class="ltn__product-item ltn__product-item-4 text-center---">
                             <div class="product-img">
-                                <a href="product-details.html"><img src="img/product-3/2.jpg" alt="#"></a>
+                                <a href="product-details.html"><img src="../img/product-3/2.jpg" alt="#"></a>
                                 <div class="product-badge">
                                     <ul>
                                         <li class="sale-badge bg-green---">For Sale</li>
@@ -717,7 +717,7 @@
                             <div class="product-info-bottom">
                                 <div class="real-estate-agent">
                                     <div class="agent-img">
-                                        <a href="team-details.html"><img src="img/blog/author.jpg" alt="#"></a>
+                                        <a href="team-details.html"><img src="../img/blog/author.jpg" alt="#"></a>
                                     </div>
                                     <div class="agent-brief">
                                         <h6><a href="team-details.html">William Seklo</a></h6>
@@ -749,7 +749,7 @@
                     <div class="col-lg-12">
                         <div class="ltn__product-item ltn__product-item-4 text-center---">
                             <div class="product-img">
-                                <a href="product-details.html"><img src="img/product-3/3.jpg" alt="#"></a>
+                                <a href="product-details.html"><img src="../img/product-3/3.jpg" alt="#"></a>
                                 <div class="product-badge">
                                     <ul>
                                         <li class="sale-badge bg-green">For Rent</li>
@@ -799,7 +799,7 @@
                             <div class="product-info-bottom">
                                 <div class="real-estate-agent">
                                     <div class="agent-img">
-                                        <a href="team-details.html"><img src="img/blog/author.jpg" alt="#"></a>
+                                        <a href="team-details.html"><img src="../img/blog/author.jpg" alt="#"></a>
                                     </div>
                                     <div class="agent-brief">
                                         <h6><a href="team-details.html">William Seklo</a></h6>
@@ -831,7 +831,7 @@
                     <div class="col-lg-12">
                         <div class="ltn__product-item ltn__product-item-4 text-center---">
                             <div class="product-img">
-                                <a href="product-details.html"><img src="img/product-3/4.jpg" alt="#"></a>
+                                <a href="product-details.html"><img src="../img/product-3/4.jpg" alt="#"></a>
                                 <div class="product-badge">
                                     <ul>
                                         <li class="sale-badge bg-green">For Rent</li>
@@ -881,7 +881,7 @@
                             <div class="product-info-bottom">
                                 <div class="real-estate-agent">
                                     <div class="agent-img">
-                                        <a href="team-details.html"><img src="img/blog/author.jpg" alt="#"></a>
+                                        <a href="team-details.html"><img src="../img/blog/author.jpg" alt="#"></a>
                                     </div>
                                     <div class="agent-brief">
                                         <h6><a href="team-details.html">William Seklo</a></h6>
@@ -913,7 +913,7 @@
                     <div class="col-lg-12">
                         <div class="ltn__product-item ltn__product-item-4 text-center---">
                             <div class="product-img">
-                                <a href="product-details.html"><img src="img/product-3/5.jpg" alt="#"></a>
+                                <a href="product-details.html"><img src="../img/product-3/5.jpg" alt="#"></a>
                                 <div class="product-badge">
                                     <ul>
                                         <li class="sale-badge bg-green">For Rent</li>
@@ -963,7 +963,7 @@
                             <div class="product-info-bottom">
                                 <div class="real-estate-agent">
                                     <div class="agent-img">
-                                        <a href="team-details.html"><img src="img/blog/author.jpg" alt="#"></a>
+                                        <a href="team-details.html"><img src="../img/blog/author.jpg" alt="#"></a>
                                     </div>
                                     <div class="agent-brief">
                                         <h6><a href="team-details.html">William Seklo</a></h6>
@@ -1039,7 +1039,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="apartments-plan-img">
-                                                <img src="img/others/10.png" alt="#">
+                                                <img src="../img/others/10.png" alt="#">
                                             </div>
                                         </div>
                                     </div>
@@ -1068,7 +1068,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="apartments-plan-img">
-                                                <img src="img/others/10.png" alt="#">
+                                                <img src="../img/others/10.png" alt="#">
                                             </div>
                                         </div>
                                     </div>
@@ -1097,7 +1097,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="apartments-plan-img">
-                                                <img src="img/others/10.png" alt="#">
+                                                <img src="../img/others/10.png" alt="#">
                                             </div>
                                         </div>
                                     </div>
@@ -1126,7 +1126,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="apartments-plan-img">
-                                                <img src="img/others/10.png" alt="#">
+                                                <img src="../img/others/10.png" alt="#">
                                             </div>
                                         </div>
                                     </div>
@@ -1155,7 +1155,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="apartments-plan-img">
-                                                <img src="img/others/10.png" alt="#">
+                                                <img src="../img/others/10.png" alt="#">
                                             </div>
                                         </div>
                                     </div>
@@ -1170,7 +1170,7 @@
 
         <!-- VIDEO AREA START -->
         <div class="ltn__video-popup-area ltn__video-popup-margin---">
-            <div class="ltn__video-bg-img ltn__video-popup-height-600--- bg-overlay-black-30 bg-image bg-fixed ltn__animation-pulse1" data-bs-bg="img/bg/19.jpg">
+            <div class="ltn__video-bg-img ltn__video-popup-height-600--- bg-overlay-black-30 bg-image bg-fixed ltn__animation-pulse1" data-bs-bg="../img/bg/19.jpg">
                 <a class="ltn__video-icon-2 ltn__video-icon-2-border---" href="https://www.youtube.com/embed/X7R-q9rsrtU?autoplay=1&amp;showinfo=0" data-rel="lightcase:myCollection">
                     <i class="fa fa-play"></i>
                 </a>
@@ -1179,7 +1179,7 @@
         <!-- VIDEO AREA END -->
 
         <!-- CATEGORY AREA START -->
-        <div class="ltn__category-area section-bg-1-- ltn__primary-bg before-bg-1 bg-image bg-overlay-theme-black-5--0 pt-115 pb-90 d-none" data-bs-bg="img/bg/5.jpg">
+        <div class="ltn__category-area section-bg-1-- ltn__primary-bg before-bg-1 bg-image bg-overlay-theme-black-5--0 pt-115 pb-90 d-none" data-bs-bg="../img/bg/5.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -1374,7 +1374,7 @@
         <!-- CATEGORY AREA END -->
 
         <!-- TESTIMONIAL AREA START (testimonial-7) -->
-        <div class="ltn__testimonial-area section-bg-1--- bg-image-top pt-115 pb-70" data-bs-bg="img/bg/20.jpg">
+        <div class="ltn__testimonial-area section-bg-1--- bg-image-top pt-115 pb-70" data-bs-bg="../img/bg/20.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -1419,7 +1419,7 @@
                                     um dolor sit amet, consecte</p>
                                 <div class="ltn__testimoni-info-inner">
                                     <div class="ltn__testimoni-img">
-                                        <img src="img/testimonial/2.jpg" alt="#">
+                                        <img src="../img/testimonial/2.jpg" alt="#">
                                     </div>
                                     <div class="ltn__testimoni-name-designation">
                                         <h5>Kelian Anderson</h5>
@@ -1441,7 +1441,7 @@
                                     um dolor sit amet, consecte</p>
                                 <div class="ltn__testimoni-info-inner">
                                     <div class="ltn__testimoni-img">
-                                        <img src="img/testimonial/3.jpg" alt="#">
+                                        <img src="../img/testimonial/3.jpg" alt="#">
                                     </div>
                                     <div class="ltn__testimoni-name-designation">
                                         <h5>Adam Joseph</h5>
@@ -1463,7 +1463,7 @@
                                     um dolor sit amet, consecte</p>
                                 <div class="ltn__testimoni-info-inner">
                                     <div class="ltn__testimoni-img">
-                                        <img src="img/testimonial/4.jpg" alt="#">
+                                        <img src="../img/testimonial/4.jpg" alt="#">
                                     </div>
                                     <div class="ltn__testimoni-name-designation">
                                         <h5>James Carter</h5>
@@ -1485,32 +1485,32 @@
                 <div class="row ltn__brand-logo-active">
                     <div class="col-lg-12">
                         <div class="ltn__brand-logo-item">
-                            <img src="img/brand-logo/1.png" alt="Brand Logo">
+                            <img src="../img/brand-logo/1.png" alt="Brand Logo">
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="ltn__brand-logo-item">
-                            <img src="img/brand-logo/2.png" alt="Brand Logo">
+                            <img src="../img/brand-logo/2.png" alt="Brand Logo">
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="ltn__brand-logo-item">
-                            <img src="img/brand-logo/3.png" alt="Brand Logo">
+                            <img src="../img/brand-logo/3.png" alt="Brand Logo">
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="ltn__brand-logo-item">
-                            <img src="img/brand-logo/4.png" alt="Brand Logo">
+                            <img src="../img/brand-logo/4.png" alt="Brand Logo">
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="ltn__brand-logo-item">
-                            <img src="img/brand-logo/5.png" alt="Brand Logo">
+                            <img src="../img/brand-logo/5.png" alt="Brand Logo">
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="ltn__brand-logo-item">
-                            <img src="img/brand-logo/3.png" alt="Brand Logo">
+                            <img src="../img/brand-logo/3.png" alt="Brand Logo">
                         </div>
                     </div>
                 </div>
