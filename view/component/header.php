@@ -92,7 +92,7 @@
                         <nav>
                             <div class="ltn__main-menu">
                                 <ul>
-                                    <li class=""><a href="../page/index.php">Trang chủ</a>
+                                    <li class=""><a href="../page/home.php">Trang chủ</a>
                                     </li>
                                     <li class=""><a href="about.php">Về chúng tôi</a>
                                     </li>
