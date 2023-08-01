@@ -32,13 +32,6 @@
 
 <!-- Body main wrapper start -->
 <div class="wrapper">
-
-    <!-- HEADER AREA START (header-5) -->
-    <?php
-    include 'C:\Users\dungv\Desktop\DA1\view\component\header.php';
-    ?>
-    <!-- HEADER AREA END -->
-
     <!-- Utilize Cart Menu Start -->
     <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
         <div class="ltn__utilize-menu-inner ltn__scrollbar">

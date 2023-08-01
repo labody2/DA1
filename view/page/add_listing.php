@@ -39,7 +39,7 @@
                         <!-- HTML -->
                        <!-- HTML -->
                        <?php
-                       include 'C:\Users\dungv\Desktop\DA1\controller\controller_category.php';
+                       include_once 'C:\Users\dungv\Desktop\DA1\controller\controller_category.php';
                         // Gọi hàm getCategories để lấy danh sách các categories
                         $categories = getCategories($conn);
                         // Duyệt qua từng category và in ra các button tương ứng

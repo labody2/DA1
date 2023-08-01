@@ -169,11 +169,11 @@ function addProduct($conn, $productName, $price, $description, $categoryId, $ima
             // Thực thi câu truy vấn
             if ($conn->query($sql) === TRUE) {
                 echo "<script>alert ('Đăng bất động sản thành công');</script>";
-                echo "<script>window.location.href = '/view/page/index.php';</script>";
+                echo "<script>window.location.href = '../view/page/index.php?link=trang_chu';</script>";
                 return true; // Thêm sản phẩm thành công
             } else {
                 echo "<script>alert ('Có lỗi xảy ra');</script>";
-                echo "<script>window.location.href = '/view/page/index.php';</script>";
+                echo "<script>window.location.href = '../view/page/index.php?link=trang_chu';</script>";
                 return false; // Lỗi khi thêm sản phẩm
             }
         } else {

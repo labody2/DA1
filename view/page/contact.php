@@ -25,19 +25,8 @@
 </head>
 
 <body>
-    <!--[if lte IE 9]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-    <![endif]-->
 
-    <!-- Add your site or application content here -->
-
-    <!-- Body main wrapper start -->
     <div class="body-wrapper">
-
-        <!-- HEADER AREA START (header-5) -->
-
-        <!-- HEADER AREA END -->
-
         <!-- Utilize Cart Menu Start -->
         <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
             <div class="ltn__utilize-menu-inner ltn__scrollbar">
@@ -359,30 +348,7 @@
 
         </div>
         <!-- GOOGLE MAP AREA END -->
-
-        <!-- CALL TO ACTION START (call-to-action-6) -->
-        <div class="ltn__call-to-action-area call-to-action-6 before-bg-bottom" data-bs-bg="img/1.jpg--">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---">
-                            <div class="coll-to-info text-color-white">
-                                <h1>Looking for a dream home?</h1>
-                                <p>We can help you realize your dream of a new home</p>
-                            </div>
-                            <div class="btn-wrapper">
-                                <a class="btn btn-effect-3 btn-white" href="contact.html">Explore Properties <i class="icon-next"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- CALL TO ACTION END -->
-
-        <!-- FOOTER AREA START -->
-
-        <!-- FOOTER AREA END -->
     </div>
     <!-- Body main wrapper end -->
 
@@ -395,6 +361,5 @@
 
 </body>
 
-<!-- Mirrored from tunatheme.com/tf/html/quarter-preview/quarter/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 13 Jul 2023 06:27:48 GMT -->
 
 </html>

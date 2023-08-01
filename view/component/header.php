@@ -16,10 +16,10 @@
 </head>
 <body>
     <?php
-        include 'C:\Users\dungv\Desktop\DA1\admin\start_session.php';
-        include 'C:\Users\dungv\Desktop\DA1\controller\controller_account.php';
-        include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
-        include 'C:\Users\dungv\Desktop\DA1\controller\controller_category.php';
+        include_once 'C:\Users\dungv\Desktop\DA1\admin\start_session.php';
+        include_once 'C:\Users\dungv\Desktop\DA1\controller\controller_account.php';
+        include_once 'C:\Users\dungv\Desktop\DA1\model\connect.php';
+        include_once 'C:\Users\dungv\Desktop\DA1\controller\controller_category.php';
         $loggedIn = isset($_SESSION["username"]);
         $categories = getCategories($conn);
     ?>
@@ -55,7 +55,7 @@
                                 <li>
                                     <!-- header-top-btn -->
                                     <div class="header-top-btn">
-                                        <a href="/view/page/add_listing.php">Add Listing</a>
+                                        <a href="../page/index.php?link=dang_BĐS">Add Listing</a>
                                     </div>
                                 </li>
                             </ul>
@@ -92,20 +92,20 @@
                         <nav>
                             <div class="ltn__main-menu">
                                 <ul>
-                                    <li class=""><a href="../page/home.php">Trang chủ</a>
+                                    <li class=""><a href="../page/index.php?link=trang_chu">Trang chủ</a>
                                     </li>
-                                    <li class=""><a href="about.php">Về chúng tôi</a>
+                                    <li class=""><a href="../page/index.php?link=about">Về chúng tôi</a>
                                     </li>
-                                    <li class="menu-icon"><a href="../page/shop.php">Nhà đất</a>
+                                    <li class="menu-icon"><a href="../page/index.php?link=BĐS">Nhà đất</a>
                                     <ul>
                                         <?php foreach ($categories as $category) : ?>                                  
-                                            <li class="menu-icon"><a href="../page/shop.php"><?= $category['category_name'] ?></a></li>
+                                            <li class="menu-icon"><a href="../page/index.php?link=BĐS"><?= $category['category_name'] ?></a></li>
                                         <?php endforeach; ?>
                                     </ul>
                                         </li>
-                                    <li class=""><a href="../page/article-card.php">Tin tức</a>
+                                    <li class=""><a href="../page/index.php?link=tin_tuc">Tin tức</a>
                                     </li>
-                                    <li><a href="contact.html">Liên hệ</a></li>
+                                    <li><a href="../page/index.php?link=lien_he">Liên hệ</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -144,7 +144,7 @@
                                         }
                                         ?>
                                         <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="/view/page/product_own.php">BĐS đang bán</a></li>
+                                        <li><a href="../page/index.php?link=BĐS_cua_toi">BĐS đang bán</a></li>
                                     <?php else: ?>
                                         <li><a href="/view/signin_signup/signin.php">Đăng nhập</a></li>
                                         <li><a href="/view/signin_signup/signup.php">Đăng kí</a></li>

@@ -93,12 +93,11 @@ mysqli_close($conn);
           </a>
   
           <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-            Welcome to Squid 🦑
+            Welcome to BDS.com 🦑
           </h2>
   
           <p class="mt-4 leading-relaxed text-white/90">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam
-            dolorum aliquam, quibusdam aperiam voluptatum.
+            Giải pháp bán bất động sản trực tuyến hàng đầu
           </p>
         </div>
       </section>
@@ -208,11 +207,6 @@ mysqli_close($conn);
                   name="marketing_accept"
                   class="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
                 />
-  
-                <span class="text-sm text-gray-700">
-                  I want to receive emails about events, product updates and
-                  company announcements.
-                </span>
               </label>
             </div>
   
@@ -225,7 +219,7 @@ mysqli_close($conn);
               </button>
               <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                 Already have an account?
-                <a href="#" class="text-gray-700 underline">Log in</a>.
+                <a href="\view\signin_signup\signin.php" class="text-gray-700 underline">Log in</a>.
               </p>
             </div>
           </form>
