@@ -18,12 +18,13 @@ if (isset($_SESSION["username"])) {
     $username = $_SESSION["username"];
     $id = getIdByUsername($conn, $username);
     $productId = getProductIdByUsername_id($conn, $id);
-    $products = getProductbyProductId($conn, $productId);
+    if ($productId!==null) {
+        $products = getProductbyProductId($conn, $productId);
+    }
 
     if (!empty($products)) {
         foreach ($products as $product) {
             $categoryname=getCategoryById($conn, $product['categoryId']);
-            // Bắt đầu vòng lặp của bạn
 ?>
             <!-- start  -->
             
@@ -41,6 +42,40 @@ if (isset($_SESSION["username"])) {
                             <div class="text-sm leading-4 font-normal"><span class="text-xs leading-4 font-normal text-gray-500"> Mô tả:</span> <?= $product['description']; ?></div>
                         </div>
                     </div>
+                    <div class="ml-3 my-5 ">
+                    <?php
+                        $status = $product['status'];
+                        if ($status === 'fail') {
+                            echo '
+                            <button id="dropdownButton' . $product['id'] . '" class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 cursor-pointer w-full" type="button">
+                                Không được duyệt
+                            </button>
+                            <div id="messageDecline' . $product['id'] . '" class="z-10 bg-white divide-y divide-gray-100 shadow w-44 dark:bg-gray-700 hidden w-full">
+                                <ul>
+                                    <span class="block px-4 py-2 ">Lí do: ' . $product['message_decline'] . '</span>
+                                </ul>
+                            </div>
+                            <script>
+                                document.getElementById("dropdownButton' . $product['id'] . '").addEventListener("click", function() {
+                                    const messageDiv = document.getElementById("messageDecline' . $product['id'] . '");
+                                    if (messageDiv.style.display === "block") {
+                                        messageDiv.style.display = "none";
+                                    } else {
+                                        messageDiv.style.display = "block";
+                                    }
+                                });
+                            </script>
+                        ';
+                        
+        
+                        } elseif ($status === 'success') {
+                            echo '<span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Duyệt thành công</span>';
+                        } elseif ($status === 'pending') {
+                            echo '<span class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Đang duyệt...</span>';
+                        }
+                    ?>
+                    
+                    </div>
                     <div>
                         <div class="ml-3 my-5 bg-yellow-600 p-1 w-20">
                             <a href="/controller/controller_product.php?id=<?= $product['id'] ?>&action=del"><div class="uppercase text-xs leading-4 font-semibold text-center text-red-100">Xóa</div></a>
@@ -50,7 +85,7 @@ if (isset($_SESSION["username"])) {
                     </div>
                 </div>
             </div>
-            <!-- end -->
+
 <?php
         }
     } else {

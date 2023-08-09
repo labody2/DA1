@@ -13,19 +13,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Lấy dữ liệu từ form
     $username = $_POST["username"];
     $password = $_POST["password"];
-
-    // Kiểm tra xem tài khoản và mật khẩu hợp lệ (ví dụ: kiểm tra trong cơ sở dữ liệu)
-    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+    $sql = "SELECT * FROM users WHERE username = '$username'";
     $result = mysqli_query($conn, $sql);
-
     if (mysqli_num_rows($result) === 1) {
-        // Đăng nhập thành công, lưu thông tin vào session và chuyển hướng đến trang chính
-        $_SESSION["loggedin"] = true;
-        $_SESSION["username"] = $username;
-        echo "<script>window.location.href = '/view/page/index.php';</script>";
+        $user = mysqli_fetch_assoc($result);
+        if ($user['status'] == 0) {
+            // Tài khoản bị khóa, hiển thị thông báo lỗi
+            $errorMsg = "Tài khoản của bạn đã bị khóa!";
+        } elseif ($user['password'] === $password) {
+            // Đăng nhập thành công, lưu thông tin vào session và chuyển hướng đến trang chính
+            $_SESSION["loggedin"] = true;
+            $_SESSION["username"] = $username;
+            echo "<script>window.location.href = '/view/page/index.php';</script>";
+        } else {
+            // Sai mật khẩu, hiển thị thông báo lỗi
+            $errorMsg = "Mật khẩu không chính xác!";
+        }
     } else {
-        // Đăng nhập không thành công, hiển thị thông báo lỗi
-        $errorMsg = "Tên đăng nhập hoặc mật khẩu không chính xác!";
+        // Tài khoản không tồn tại, hiển thị thông báo lỗi
+        $errorMsg = "Tên đăng nhập không chính xác!";
     }
 }
 

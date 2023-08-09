@@ -12,23 +12,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="css/font-icons.css">
+    <link rel="stylesheet" href="../css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="css/plugins.css">
+    <link rel="stylesheet" href="../css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <script src="../js/plugins.js"></script>
+    <!-- Main JS -->
+    <script src="../js/main.js"></script>
 </head>
 
 <body>
-    <!--[if lte IE 9]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-    <![endif]-->
-
-    <!-- Add your site or application content here -->
 
 <!-- Body main wrapper start -->
 <div class="body-wrapper">
@@ -41,11 +39,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ltn__breadcrumb-inner">
-                        <h1 class="page-title">Property details</h1>
-                        <div class="ltn__breadcrumb-list">
+                        <h1 class="page-title">Thông tin chi tiết BĐS</h1>
+                        <div class="ltn__breadcrumb-list"></div>
                             <ul>
-                                <li><a href="index.html"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
-                                <li>Property details</li>
+                                <li><a href="index.php"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
                             </ul>
                         </div>
                     </div>
@@ -54,46 +51,46 @@
         </div>
     </div>
     <!-- BREADCRUMB AREA END -->
-
+        
+    <?php
+    include 'C:\Users\dungv\Desktop\DA1\controller\controller_product.php';
+    include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
+    if (isset($_GET['id'])) {
+        $productDetails = getProductDetail($conn, $_GET['id']);
+        if (!empty($productDetails)) {
+            $product = $productDetails[0];
+           
+        } else {
+            // Handle product not found
+            echo "Sản phẩm không tồn tại.";
+            exit();
+        }
+    } else {
+        echo "Lỗi: Không có ID sản phẩm được cung cấp.";
+        exit();
+    }
+    ?>            
+    <?php
+        $imageStr = $product['img1'] ;
+        $imageArray = explode(",", $imageStr);
+    ?>
     <!-- IMAGE SLIDER AREA START (img-slider-3) -->
+
     <div class="ltn__img-slider-area mb-90">
         <div class="container-fluid">
             <div class="row ltn__image-slider-5-active slick-arrow-1 slick-arrow-1-inner ltn__no-gutter-all">
+
+            <?php foreach ($imageArray as $image) : ?>
                 <div class="col-lg-12">
                     <div class="ltn__img-slide-item-4">
-                        <a href="img/img-slide/31.jpg" data-rel="lightcase:myCollection">
-                            <img src="img/img-slide/31.jpg" alt="Image">
+                        <a href="<?= $image ?>" data-rel="lightcase:myCollection">
+                            <img src="<?= $image ?>" alt="Image">
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-12">
-                    <div class="ltn__img-slide-item-4">
-                        <a href="img/img-slide/32.jpg" data-rel="lightcase:myCollection">
-                            <img src="img/img-slide/32.jpg" alt="Image">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__img-slide-item-4">
-                        <a href="img/img-slide/33.jpg" data-rel="lightcase:myCollection">
-                            <img src="img/img-slide/33.jpg" alt="Image">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__img-slide-item-4">
-                        <a href="img/img-slide/34.jpg" data-rel="lightcase:myCollection">
-                            <img src="img/img-slide/34.jpg" alt="Image">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__img-slide-item-4">
-                        <a href="img/img-slide/35.jpg" data-rel="lightcase:myCollection">
-                            <img src="img/img-slide/35.jpg" alt="Image">
-                        </a>
-                    </div>
-                </div>
+            <?php endforeach; ?>
+
+            </div>
             </div>
         </div>
     </div>
@@ -114,116 +111,30 @@
                                     <a class="bg-orange" href="#">For Rent</a>
                                 </li>
                                 <li class="ltn__blog-date">
-                                    <i class="far fa-calendar-alt"></i>May 19, 2021
+                                    <i class="far fa-calendar-alt"></i><?= $product['create_time'] ?>
                                 </li>
                                 <li>
                                     <a href="#"><i class="far fa-comments"></i>35 Comments</a>
                                 </li>
                             </ul>
                         </div>
-                        <h1>Diamond Manor Apartment</h1>
-                        <label><span class="ltn__secondary-color"><i class="flaticon-pin"></i></span> Belmont Gardens, Chicago</label>
+                        <h1><?= $product['name'] ?></h1>
+                        <label><span class="ltn__secondary-color"><i class="flaticon-pin"></i></span> <?= $product['address'] ?></label>
                         <h4 class="title-2">Description</h4>
-                        <p>Massa tempor nec feugiat nisl pretium. Egestas fringilla phasellus faucibus scelerisque eleifend donec
-                            Porta nibh venenatis cras sed felis eget velit aliquet. Neque volutpat ac tincidunt vitae semper
-                            quis lectus. Turpis in eu mi bibendum neque egestas congue quisque. Sed elementum tempus egestas
-                            sed sed risus pretium quam. Dignissim sodales ut eu sem. Nibh mauris cursus mattis molestee
-                            iaculis at erat pellentesque. Id interdum velit laoreet id donec ultrices tincidunt.</p>
-                        <p>To the left is the modern kitchen with central island, leading through to the unique breakfast family room which feature glass walls and doors out onto the garden and access to the separate utility room.</p>
+                        <p><?= $product['description'] ?></p>
 
                         <h4 class="title-2">Property Detail</h4>  
                         <div class="property-detail-info-list section-bg-1 clearfix mb-60">                          
                             <ul>
-                                <li><label>Property ID:</label> <span>HZ29</span></li>
-                                <li><label>Home Area: </label> <span>120 sqft</span></li>
-                                <li><label>Rooms:</label> <span>7</span></li>
-                                <li><label>Baths:</label> <span>2</span></li>
-                                <li><label>Year built:</label> <span>1992</span></li>
+                                <li><label>Mã số  ID:</label> <span><?= $product['id'] ?></span></li>
+                                <li><label>Diện tích </label> <span><?= $product['square'] ?>m2</span></li>
+                                <li><label>Phòng ngủ:</label> <span><?= $product['bed_room'] ?></span></li>
+                                <li><label>Phòng tắm:</label> <span><?= $product['bathroom'] ?></span></li>
+                                <li><label>Phòng khách:</label> <span><?= $product['other_room'] ?></span></li>
                             </ul>
                             <ul>
-                                <li><label>Lot Area:</label> <span>HZ29 </span></li>
-                                <li><label>Lot dimensions:</label> <span>120 sqft</span></li>
-                                <li><label>Beds:</label> <span>7</span></li>
-                                <li><label>Price:</label> <span>2</span></li>
-                                <li><label>Property Status:</label> <span>For Sale</span></li>
-                            </ul>
-                        </div>
-                                        
-                        <h4 class="title-2">Facts and Features</h4>
-                        <div class="property-detail-feature-list clearfix mb-45">                            
-                            <ul>
-                                <li>
-                                    <div class="property-detail-feature-list-item">
-                                        <i class="flaticon-double-bed"></i>
-                                        <div>
-                                            <h6>Living Room</h6>
-                                            <small>20 x 16 sq feet</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="property-detail-feature-list-item">
-                                        <i class="flaticon-double-bed"></i>
-                                        <div>
-                                            <h6>Garage</h6>
-                                            <small>20 x 16 sq feet</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="property-detail-feature-list-item">
-                                        <i class="flaticon-double-bed"></i>
-                                        <div>
-                                            <h6>Dining Area</h6>
-                                            <small>20 x 16 sq feet</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="property-detail-feature-list-item">
-                                        <i class="flaticon-double-bed"></i>
-                                        <div>
-                                            <h6>Bedroom</h6>
-                                            <small>20 x 16 sq feet</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="property-detail-feature-list-item">
-                                        <i class="flaticon-double-bed"></i>
-                                        <div>
-                                            <h6>Bathroom</h6>
-                                            <small>20 x 16 sq feet</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="property-detail-feature-list-item">
-                                        <i class="flaticon-double-bed"></i>
-                                        <div>
-                                            <h6>Gym Area</h6>
-                                            <small>20 x 16 sq feet</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="property-detail-feature-list-item">
-                                        <i class="flaticon-double-bed"></i>
-                                        <div>
-                                            <h6>Garden</h6>
-                                            <small>20 x 16 sq feet</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="property-detail-feature-list-item">
-                                        <i class="flaticon-double-bed"></i>
-                                        <div>
-                                            <h6>Parking</h6>
-                                            <small>20 x 16 sq feet</small>
-                                        </div>
-                                    </div>
-                                </li>
+                                <li><label>Giá:</label> <span>~<?= $product['price'] ?> tỷ đồng</span></li>
+                                <li><label>Trạng thái:</label> <span>Đang rao</span></li>
                             </ul>
                         </div>
 
@@ -231,138 +142,24 @@
                         <div class="ltn__property-details-gallery mb-30">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <a href="img/others/14.jpg" data-rel="lightcase:myCollection">
-                                        <img class="mb-30" src="img/others/14.jpg" alt="Image">
+                                    <a href="../img/others/14.jpg" data-rel="lightcase:myCollection">
+                                        <img class="mb-30" src="../img/others/14.jpg" alt="Image">
                                     </a>
-                                    <a href="img/others/15.jpg" data-rel="lightcase:myCollection">
-                                        <img class="mb-30" src="img/others/15.jpg" alt="Image">
+                                    <a href="../img/others/15.jpg" data-rel="lightcase:myCollection">
+                                        <img class="mb-30" src="../img/others/15.jpg" alt="Image">
                                     </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="img/others/16.jpg" data-rel="lightcase:myCollection">
-                                        <img class="mb-30" src="img/others/16.jpg" alt="Image">
+                                    <a href="../img/others/16.jpg" data-rel="lightcase:myCollection">
+                                        <img class="mb-30" src="../img/others/16.jpg" alt="Image">
                                     </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h4 class="title-2 mb-10">Amenities</h4>
-                        <div class="property-details-amenities mb-60">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="ltn__menu-widget">
-                                        <ul>
-                                            <li>
-                                                <label class="checkbox-item">Air Conditioning
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">Gym
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">Microwave
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">Swimming Pool
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">WiFi
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="ltn__menu-widget">
-                                        <ul>
-                                            <li>
-                                                <label class="checkbox-item">Barbeque
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">Recreation
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">Microwave
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">Basketball Cout
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">Fireplace
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="ltn__menu-widget">
-                                        <ul>
-                                            <li>
-                                                <label class="checkbox-item">Refrigerator
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">Window Coverings
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">Washer
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">24x7 Security
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-item">Indoor Game
-                                                    <input type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <h4 class="title-2">Location</h4>
                         <div class="property-details-google-map mb-60">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9334.271551495209!2d-73.97198251485975!3d40.668170674982946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b0456b5a2e7%3A0x68bdf865dda0b669!2sBrooklyn%20Botanic%20Garden%20Shop!5e0!3m2!1sen!2sbd!4v1590597267201!5m2!1sen!2sbd" width="100%" height="100%" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29793.988458865213!2d105.81636406617432!3d21.022738359976767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab9bd9861ca1%3A0xe7887f7b72ca17a9!2zSMOgIE7hu5lpLCBIb8OgbiBLaeG6v20sIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1691179472414!5m2!1svi!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
 
                         <h4 class="title-2">Floor Plans</h4>
@@ -811,9 +608,21 @@
                         <!-- Author Widget -->
                         <div class="widget ltn__author-widget">
                             <div class="ltn__author-widget-inner text-center">
-                                <img src="img/team/4.jpg" alt="Image">
-                                <h5>Rosalina D. Willaimson</h5>
-                                <small>Traveller/Photographer</small>
+                                <img src="../img/team/4.jpg" alt="Image">
+                                <?php
+                                $userPost=getUserByAccountId_post($conn, $product['accountId_post'] );
+                                if (!empty($userPost)) {
+                                    $user = $userPost[0];
+                                
+                                } else {
+                                    // Handle product not found
+                                    echo "Người dùng không tồn tại.";
+                                    exit();
+                                }
+                                ?>
+                                <h5><?= $user['name'] ?></h5>
+                                <span>Email:</span>
+                                <a href="mailto:<?=$user['email']?>"><?= $user['email'] ?></a>
                                 <div class="product-ratting">
                                     <ul>
                                         <li><a href="#"><i class="fas fa-star"></i></a></li>
@@ -824,7 +633,10 @@
                                         <li class="review-total"> <a href="#"> ( 1 Reviews )</a></li>
                                     </ul>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis distinctio, odio, eligendi suscipit reprehenderit atque.</p>
+                                <span>Liên hệ: (+84)</span>
+                                <a href="tel:<?= $user['sđt'] ?>">
+                                <?= $user['sđt'] ?>
+                                </a>
                                 <div class="ltn__social-media">
                                     <ul>
                                         <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
@@ -836,22 +648,19 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Search Widget -->
-                        <div class="widget ltn__search-widget">
-                            <h4 class="ltn__widget-title ltn__widget-title-border-2">Search Objects</h4>
-                            <form action="#">
-                                <input type="text" name="search" placeholder="Search your keyword...">
-                                <button type="submit"><i class="fas fa-search"></i></button>
-                            </form>
-                        </div>
                         <!-- Form Widget -->
                         <div class="widget ltn__form-widget">
                             <h4 class="ltn__widget-title ltn__widget-title-border-2">Drop Messege For Book</h4>
-                            <form action="#">
+                            <form action="/controller/controller_product.php" method="post">
                                 <input type="text" name="yourname" placeholder="Your Name*">
                                 <input type="text" name="youremail" placeholder="Your e-Mail*">
+                                <div class="relative z-0 w-full mb-6 group">
+                                    <input type="number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="yourphone" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" required />
+                                    <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone number (+84)</label>
+                                </div>
                                 <textarea name="yourmessage" placeholder="Write Message..."></textarea>
-                                <button type="submit" class="btn theme-btn-1">Send Messege</button>
+                                <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+                                <button type="submit" class="btn theme-btn-1">Gửi thông tin liên lạc</button>
                             </form>
                         </div>
                         <!-- Top Rated Product Widget -->
@@ -1506,363 +1315,14 @@
         </div>
     </div>
     <!-- PRODUCT SLIDER AREA END -->
-
-    <!-- CALL TO ACTION START (call-to-action-6) -->
-    <div class="ltn__call-to-action-area call-to-action-6 before-bg-bottom" data-bs-bg="img/1.jpg--">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="call-to-action-inner call-to-action-inner-6 ltn__secondary-bg position-relative text-center---">
-                        <div class="coll-to-info text-color-white">
-                            <h1>Looking for a dream home?</h1>
-                            <p>We can help you realize your dream of a new home</p>
-                        </div>
-                        <div class="btn-wrapper">
-                            <a class="btn btn-effect-3 btn-white" href="contact.html">Explore Properties <i class="icon-next"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- CALL TO ACTION END -->
-
-    <!-- FOOTER AREA START -->
-    <footer class="ltn__footer-area  ">
-        <div class="footer-top-area  section-bg-2 plr--5">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-about-widget">
-                            <div class="footer-logo">
-                                <div class="site-logo">
-                                    <img src="img/logo-2.png" alt="Logo">
-                                </div>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is dummy text of the printing.</p>
-                            <div class="footer-address">
-                                <ul>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="icon-placeholder"></i>
-                                        </div>
-                                        <div class="footer-address-info">
-                                            <p>Brooklyn, New York, United States</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="icon-call"></i>
-                                        </div>
-                                        <div class="footer-address-info">
-                                            <p><a href="tel:+0123-456789">+0123-456789</a></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="icon-mail"></i>
-                                        </div>
-                                        <div class="footer-address-info">
-                                            <p><a href="mailto:example@example.com">example@example.com</a></p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="ltn__social-media mt-20">
-                                <ul>
-                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                                    <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Company</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="shop.html">All Products</a></li>
-                                    <li><a href="locations.html">Locations Map</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Services</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="order-tracking.html">Order tracking</a></li>
-                                    <li><a href="wishlist.html">Wish List</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="account.html">My account</a></li>
-                                    <li><a href="about.html">Terms & Conditions</a></li>
-                                    <li><a href="about.html">Promotional Offers</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Customer Care</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="account.html">My account</a></li>
-                                    <li><a href="wishlist.html">Wish List</a></li>
-                                    <li><a href="order-tracking.html">Order tracking</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-sm-12 col-12">
-                        <div class="footer-widget footer-newsletter-widget">
-                            <h4 class="footer-title">Newsletter</h4>
-                            <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
-                            <div class="footer-newsletter">
-                                <form action="#">
-                                    <input type="email" name="email" placeholder="Email*">
-                                    <div class="btn-wrapper">
-                                        <button class="theme-btn-1 btn" type="submit"><i class="fas fa-location-arrow"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                            <h5 class="mt-30">We Accept</h5>
-                            <img src="img/icons/payment-4.png" alt="Payment Image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ltn__copyright-area ltn__copyright-2 section-bg-7  plr--5">
-            <div class="container-fluid ltn__border-top-2">
-                <div class="row">
-                    <div class="col-md-6 col-12">
-                        <div class="ltn__copyright-design clearfix">
-                            <p>All Rights Reserved @ Company <span class="current-year"></span></p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12 align-self-center">
-                        <div class="ltn__copyright-menu text-end">
-                            <ul>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Claim</a></li>
-                                <li><a href="#">Privacy & Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- FOOTER AREA END -->
-
-    <!-- MODAL AREA START (Quick View Modal) -->
-    <div class="ltn__modal-area ltn__quick-view-modal-area">
-        <div class="modal fade" id="quick_view_modal" tabindex="-1">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <!-- <i class="fas fa-times"></i> -->
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                         <div class="ltn__quick-view-modal-inner">
-                             <div class="modal-product-item">
-                                <div class="row">
-                                    <div class="col-lg-6 col-12">
-                                        <div class="modal-product-img">
-                                            <img src="img/product/4.png" alt="#">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-12">
-                                        <div class="modal-product-info">
-                                            <div class="product-ratting">
-                                                <ul>
-                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                    <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
-                                                </ul>
-                                            </div>
-                                            <h3>3 Rooms Manhattan</h3>
-                                            <div class="product-price">
-                                                <span>$149.00</span>
-                                                <del>$165.00</del>
-                                            </div>
-                                            <div class="modal-product-meta ltn__product-details-menu-1">
-                                                <ul>
-                                                    <li>
-                                                        <strong>Categories:</strong> 
-                                                        <span>
-                                                            <a href="#">Parts</a>
-                                                            <a href="#">Car</a>
-                                                            <a href="#">Seat</a>
-                                                            <a href="#">Cover</a>
-                                                        </span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="ltn__product-details-menu-2">
-                                                <ul>
-                                                    <li>
-                                                        <div class="cart-plus-minus">
-                                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="theme-btn-1 btn btn-effect-1" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                            <span>ADD TO CART</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="ltn__product-details-menu-3">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" class="" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                                            <i class="far fa-heart"></i>
-                                                            <span>Add to Wishlist</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="" title="Compare" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                                            <i class="fas fa-exchange-alt"></i>
-                                                            <span>Compare</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <hr>
-                                            <div class="ltn__social-media">
-                                                <ul>
-                                                    <li>Share:</li>
-                                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                                                    <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                                                    
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             </div>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- MODAL AREA END -->
-
-    <!-- MODAL AREA START (Add To Cart Modal) -->
-    <div class="ltn__modal-area ltn__add-to-cart-modal-area">
-        <div class="modal fade" id="add_to_cart_modal" tabindex="-1">
-            <div class="modal-dialog modal-md" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                         <div class="ltn__quick-view-modal-inner">
-                             <div class="modal-product-item">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="modal-product-img">
-                                            <img src="img/product/1.png" alt="#">
-                                        </div>
-                                         <div class="modal-product-info">
-                                            <h5><a href="product-details.html">3 Rooms Manhattan</a></h5>
-                                            <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Cart</p>
-                                            <div class="btn-wrapper">
-                                                <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                                                <a href="checkout.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-                                            </div>
-                                         </div>
-                                         <!-- additional-info -->
-                                         <div class="additional-info d-none">
-                                            <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
-                                            <div class="payment-method">
-                                                <img src="img/icons/payment.png" alt="#">
-                                            </div>
-                                         </div>
-                                    </div>
-                                </div>
-                             </div>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- MODAL AREA END -->
-
-    <!-- MODAL AREA START (Wishlist Modal) -->
-    <div class="ltn__modal-area ltn__add-to-cart-modal-area">
-        <div class="modal fade" id="liton_wishlist_modal" tabindex="-1">
-            <div class="modal-dialog modal-md" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                         <div class="ltn__quick-view-modal-inner">
-                             <div class="modal-product-item">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="modal-product-img">
-                                            <img src="img/product/7.png" alt="#">
-                                        </div>
-                                         <div class="modal-product-info">
-                                            <h5><a href="product-details.html">3 Rooms Manhattan</a></h5>
-                                            <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Wishlist</p>
-                                            <div class="btn-wrapper">
-                                                <a href="wishlist.html" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
-                                            </div>
-                                         </div>
-                                         <!-- additional-info -->
-                                         <div class="additional-info d-none">
-                                            <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
-                                            <div class="payment-method">
-                                                <img src="img/icons/payment.png" alt="#">
-                                            </div>
-                                         </div>
-                                    </div>
-                                </div>
-                             </div>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- MODAL AREA END -->
-
+    <?php
+    include 'C:\Users\dungv\Desktop\DA1\view\component\footer.html';
+    ?>
 </div>
 <!-- Body main wrapper end -->
 
     <!-- All JS Plugins -->
-    <script src="js/plugins.js"></script>
-    <!-- Main JS -->
-    <script src="js/main.js"></script>
+
   
 </body>
 

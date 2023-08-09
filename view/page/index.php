@@ -23,8 +23,8 @@
 ?>
 <div class="container_main">
 <?php
-        if (isset($_GET['link'])) {
-        $link = $_GET['link'];
+    
+    $link = isset($_GET['link']) ? $_GET['link'] : 'trang_chu'; {
 
         switch ($link) {
             case 'trang_chu':
@@ -37,6 +37,10 @@
 
             case 'BĐS':
             include '../page/shop.php';
+            break;
+
+            case 'BĐS_detail':
+            include '../page/product-details.php';
             break;
 
             case 'tin_tuc':

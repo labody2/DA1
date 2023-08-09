@@ -1,4 +1,21 @@
 <?php
+function getAllByUsername($conn, $username)
+{
+    $sql = "SELECT * FROM users WHERE username = '$username'";
+    $result = $conn->query($sql);
+    
+    if ($result && $result->num_rows > 0) {
+        $rows = array();  // Mảng để chứa tất cả các dòng dữ liệu
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;  // Thêm dòng vào mảng
+        }
+        return $rows;
+    } else {
+        echo 'null';
+        return null;
+    }
+}
+
 function getIdByUsername($conn, $username)
 {
     $sql = "SELECT id FROM users WHERE username = '$username'";

@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src='https://cdn.tailwindcss.com'">
     <title>Đăng bất động sản</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -57,7 +58,7 @@
 
                         <script>
                             let selectedCategoryId = null;
-
+                            
                             function toggleClicked(categoryId) {
                                 const button = document.getElementById('button' + categoryId);
                                 const categoryIdInput = document.getElementById('categoryIdInput');
@@ -68,6 +69,7 @@
                                     button.classList.remove('clicked');
                                     categoryIdInput.value = '';
                                     selectedCategoryId = null;
+
                                 } else {
                                     // Chọn sản phẩm mới
                                     // Bỏ chọn sản phẩm cũ nếu có
@@ -75,12 +77,21 @@
                                         const prevButton = document.getElementById('button' + selectedCategoryId);
                                         prevButton.setAttribute('class', 'flex justify-center w-full px-6 py-3 mt-4 text-blue-500 border border-blue-500 rounded-md md:mt-0 md:w-auto md:mx-2 dark:border-blue-400 dark:text-blue-400 focus:outline-none');
                                         prevButton.classList.remove('clicked');
+                                        
                                     }
-
+                                    
                                     button.setAttribute('class', 'flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-md md:w-auto md:mx-2 focus:outline-none');
                                     button.classList.add('clicked');
                                     categoryIdInput.value = categoryId;
                                     selectedCategoryId = categoryId;
+                                    if (selectedCategoryId !== 1) {
+                                        const roomDiv = document.querySelector('.room');
+                                        roomDiv.style.display = 'none';
+                                    } else {
+                                        const roomDiv = document.querySelector('.room');
+                                        roomDiv.style.display = 'block';
+                                    }
+
                                     if (categoryIdInput.value === '') {
                                         const categoryWarning = document.getElementById('categoryWarning');
                                         categoryWarning.style.display = 'block';
@@ -96,6 +107,10 @@
                     <div>
                         <label for="productName" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Tên nhà/đất muốn đăng:</label>
                         <input placeholder="Điền vào đây" class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"type="text" id="productName" name="productName" required />
+                    </div>
+                    <div>
+                        <label for="address" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Địa chỉ:</label>
+                        <input placeholder="Điền vào đây" class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"type="text" id="address" name="address" required />
                     </div>
 
                     <div>
@@ -176,83 +191,85 @@
                         <input type="number" id="square" name="square" required placeholder="m2" class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                     </div>
                     <div>
-                        <div class="flex items-center">
-                            <span style="width:120px">Số phòng ngủ:</span>
-                            <button
-                                id="decrementBtn"
-                                type="button"
-                                class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
-                            >
-                                &minus;
-                            </button>
+                        <div class="room">
+                            <div class="flex items-center">
+                                <span style="width:120px">Số phòng ngủ:</span>
+                                <button
+                                    id="decrementBtn"
+                                    type="button"
+                                    class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                                >
+                                    &minus;
+                                </button>
 
-                            <input
-                                name="bed_room"
-                                type="number"
-                                id="Quantity"
-                                value="1"
-                                class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                            />
+                                <input
+                                    name="bed_room"
+                                    type="number"
+                                    id="Quantity"
+                                    value="1"
+                                    class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                                />
 
-                            <button
-                                id="incrementBtn"
-                                type="button"
-                                class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
-                            >
-                                &plus;
-                            </button>
-                        </div>
-                        <div class="flex items-center">
-                            <span style="width:120px">Số phòng khách:</span>
-                            <button
-                                id="decrementBtn2"
-                                type="button"
-                                class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
-                            >
-                                &minus;
-                            </button>
+                                <button
+                                    id="incrementBtn"
+                                    type="button"
+                                    class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                                >
+                                    &plus;
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span style="width:120px">Số phòng khách:</span>
+                                <button
+                                    id="decrementBtn2"
+                                    type="button"
+                                    class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                                >
+                                    &minus;
+                                </button>
 
-                            <input
-                                name="other_room"
-                                type="number"
-                                id="Quantity2"
-                                value="1"
-                                class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                            />
+                                <input
+                                    name="other_room"
+                                    type="number"
+                                    id="Quantity2"
+                                    value="1"
+                                    class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                                />
 
-                            <button
-                                id="incrementBtn2"
-                                type="button"
-                                class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
-                            >
-                                &plus;
-                            </button>
-                        </div>
-                        <div class="flex items-center">
-                            <span style="width:120px">Số phòng tắm:</span>
-                            <button
-                                id="decrementBtn3"
-                                type="button"
-                                class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
-                            >
-                                &minus;
-                            </button>
+                                <button
+                                    id="incrementBtn2"
+                                    type="button"
+                                    class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                                >
+                                    &plus;
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <span style="width:120px">Số phòng tắm:</span>
+                                <button
+                                    id="decrementBtn3"
+                                    type="button"
+                                    class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                                >
+                                    &minus;
+                                </button>
 
-                            <input
-                                name="bathroom"
-                                type="number"
-                                id="Quantity3"
-                                value="1"
-                                class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
-                            />
+                                <input
+                                    name="bathroom"
+                                    type="number"
+                                    id="Quantity3"
+                                    value="1"
+                                    class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                                />
 
-                            <button
-                                id="incrementBtn3"
-                                type="button"
-                                class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
-                            >
-                                &plus;
-                            </button>
+                                <button
+                                    id="incrementBtn3"
+                                    type="button"
+                                    class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                                >
+                                    &plus;
+                                </button>
+                            </div>
                         </div>
 
                         <script>
@@ -265,6 +282,7 @@
                             const decrementBtn3 = document.getElementById('decrementBtn3');
                             const incrementBtn3 = document.getElementById('incrementBtn3');
                             const quantityInput3 = document.getElementById('Quantity3');
+                            console.log(selectedCategoryId);
                             decrementBtn.addEventListener('click', function () {
                                 // Lấy giá trị hiện tại của input
                                 let currentValue = parseInt(quantityInput.value);

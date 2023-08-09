@@ -240,11 +240,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ltn__breadcrumb-inner">
-                        <h1 class="page-title">Property</h1>
+                        <h1 class="page-title">Danh sách bất động sản</h1>
                         <div class="ltn__breadcrumb-list">
                             <ul>
-                                <li><a href="index.html"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
-                                <li>Property</li>
+                                <li><a href="index.php"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Trang chủ</a></li>
+                                <li>Danh sách bất động sản </li>
                             </ul>
                         </div>
                     </div>
@@ -307,14 +307,6 @@
     <?php
     include 'C:\Users\dungv\Desktop\DA1\view\page\product_list.php';
     ?>
-    <!-- PRODUCT DETAILS AREA END -->
-
-    <!-- CALL TO ACTION START (call-to-action-6) -->
-    <?php
-    include 'C:\Users\dungv\Desktop\DA1\view\component\footer.html';
-    ?>
-    <!-- MODAL AREA END -->
-
 </div>
 <!-- Body main wrapper end -->
 

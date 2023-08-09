@@ -56,15 +56,52 @@ function getUserDetail($conn, $username)
 // Function to add a new user
 function addUser($conn, $username, $password)
 {
+    $checkQuery = "SELECT * FROM users WHERE username = '$username'";
+    $result = $conn->query($checkQuery);
+
+    if ($result->num_rows > 0) {
+        echo '            
+            <script src="https://cdn.tailwindcss.com"></script>
+            <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+            <span class="font-medium">Thất bại!</span> Tài khoản đã tồn tại
+            </div>
+            </div>
+        ';
+            echo '<script>
+                setTimeout(function() {
+                    window.history.back();
+                }, 1000);
+            </script>';
+        return; 
+    }
     $currentTime = date("Y-m-d H:i:s");
     // Giá trị mặc định cho role và status
     $role = "admin";
     $status = true;
-
-    $sql = "INSERT INTO users (username, password, create_time, status, role) VALUES ('$username', '$password', '$currentTime', $status, '$role')";
+    $name="admin";
+    $sql = "INSERT INTO users (username, password, create_time, status, role,name) VALUES ('$username', '$password', '$currentTime', $status, '$role','$name')";
     if ($conn->query($sql) === TRUE) {
-        echo "Thêm người dùng thành công!";
-        echo "<script>window.location.href = '/admin/admin_control.php?link=users';</script>"; 
+        echo '
+            <script src="https://cdn.tailwindcss.com"></script>
+            <div class=" flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+                <span class="font-medium">Thành công!</span> 
+            </div>
+        ';     
+            echo '<script>
+                setTimeout(function() {
+                    window.location.href = \'/admin/admin_control.php?link=users\';
+                }, 1000);
+            </script>';
     } else {
         echo "Lỗi: " . $sql . "<br>" . $conn->error;
     }
@@ -80,13 +117,43 @@ function updateUser($conn, $userId, $username, $password, $status, $role)
         $userId = $user['id'];
         $sql = "UPDATE users SET username = '$username', password = '$password', create_time = '$currentTime',  role = '$role' WHERE id = $userId";
         if ($conn->query($sql) === TRUE) {
-            echo "Cập nhật người dùng thành công!";
-            // echo "<script>window.location.href = '/admin/admin_control.php?link=users';</script>"; 
+            echo '
+            <script src="https://cdn.tailwindcss.com"></script>
+            <div class=" flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+                <span class="font-medium">Thành công!</span> 
+            </div>
+        ';    
+            echo '<script>
+            setTimeout(function() {
+                window.location.href = \'/admin/admin_control.php?link=users\';
+            }, 1000);
+            </script>';
         } else {
             echo "Lỗi: " . $sql . "<br>" . $conn->error;
         }
     } else {
-        echo "Không tìm thấy người dùng có ID $userId";
+        echo '            
+        <script src="https://cdn.tailwindcss.com"></script>
+        <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+        <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+        <span class="font-medium">Thất bại!</span> Không tìm thấy người dùng có ID $userId
+        </div>
+        </div>
+    ';
+        echo '<script>
+            setTimeout(function() {
+                window.history.back();
+            }, 1000);
+        </script>';
         exit();
     }
 }
@@ -96,16 +163,46 @@ function deleteUser($conn, $userId)
 {
     $sql = "DELETE FROM users WHERE id = $userId";
     if (mysqli_query($conn, $sql) === TRUE) {
-        echo "Xóa người dùng thành công!";
-        echo "<script>window.location.href = '/admin/admin_control.php?link=users';</script>"; 
+        echo '
+        <script src="https://cdn.tailwindcss.com"></script>
+        <div class=" flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+        <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+            <span class="font-medium">Thành công!</span> 
+        </div>
+    ';    
+        echo '<script>
+        setTimeout(function() {
+            window.location.href = \'/admin/admin_control.php?link=users\';
+        }, 1000);
+        </script>';
     } else {
-        echo "Lỗi: " . $sql . "<br>" . mysqli_error($conn);
+        echo '            
+        <script src="https://cdn.tailwindcss.com"></script>
+        <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+        <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+        <span class="font-medium">Thất bại!</span> 
+        </div>
+        </div>
+    ';
+        echo '<script>
+            setTimeout(function() {
+                window.history.back();
+            }, 1000);
+        </script>';
     }
 }
 
 // Process form data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($_POST["action"] == "update") {
+    if (isset($_POST["action"])&&$_POST["action"] == "update") {
         // Lấy thông tin người dùng từ cơ sở dữ liệu bằng hàm getUserDetail()
         $user = getUserDetail($conn, $_SESSION['username']);
 
@@ -126,25 +223,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $role = $user['role'];
             updateUser($conn, $userId, $_SESSION['username'], $password, $status, $role);
 
-            echo "Cập nhật mật khẩu thành công!";
-            // echo "<script>window.location.href = '/admin/admin_control.php?link=users';</script>";
+            echo '
+            <script src="https://cdn.tailwindcss.com"></script>
+            <div class=" flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+                <span class="font-medium">Thành công!</span> 
+            </div>
+        ';    
+            echo '<script>
+            setTimeout(function() {
+                window.location.href = \'/admin/admin_control.php?link=users\';
+            }, 1000);
+            </script>';
             exit();
         } else {
-            // Người dùng không tồn tại trong cơ sở dữ liệu, xử lý tương ứng
-            echo "Người dùng không tồn tại.";
+            echo '            
+            <script src="https://cdn.tailwindcss.com"></script>
+            <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+            <span class="font-medium">Thất bại!</span> Người dùng không tồn tại.
+            </div>
+            </div>
+        ';
+            echo '<script>
+                setTimeout(function() {
+                    window.history.back();
+                }, 1000);
+            </script>';
             exit();
         }
+    }else{
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        if (isset($_POST["update"])) {
+            $status = $_POST["status"];
+            $role = $_POST["role"];
+            $userId = $_POST["user_id"];
+            updateUser($conn, $userId, $username, $password, $status, $role);
+        } elseif (isset($_POST["add"])) {
+            addUser($conn, $username, $password);
+        }
     }
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    if (isset($_POST["update"])) {
-        $status = $_POST["status"];
-        $role = $_POST["role"];
-        $userId = $_POST["user_id"];
-        updateUser($conn, $userId, $username, $password, $status, $role);
-    } elseif (isset($_POST["add"])) {
-        addUser($conn, $username, $password);
-    }
+    
 }
 
 // Delete user
@@ -161,7 +289,23 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
             echo "<script>window.location.href = '/admin/admin_control.php?link=users';</script>";
         exit; // Đảm bảo không có mã HTML hoặc mã PHP khác được thực thi sau khi chuyển hướng
         } else {
-            echo "Yêu cầu không hợp lệ";
+            echo '            
+            <script src="https://cdn.tailwindcss.com"></script>
+            <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+            <span class="font-medium">Thất bại!</span> Yêu cầu không hợp lệ
+            </div>
+            </div>
+        ';
+            echo '<script>
+                setTimeout(function() {
+                    window.history.back();
+                }, 1000);
+            </script>';
         }
     }
 } 
@@ -185,7 +329,23 @@ function toggleUserStatus($conn, $userId)
             echo "Lỗi: " . mysqli_error($conn);
         }
     } else {
-        echo "Người dùng không tồn tại";
+        echo '            
+        <script src="https://cdn.tailwindcss.com"></script>
+        <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+        <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+        <span class="font-medium">Thất bại!</span> Người dùng không tồn tại
+        </div>
+        </div>
+    ';
+        echo '<script>
+            setTimeout(function() {
+                window.history.back();
+            }, 1000);
+        </script>';
     }
 
     return false;

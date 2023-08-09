@@ -21,6 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Lấy dữ liệu từ form
     $name = $_POST["name"];
     $username = $_POST["username"];
+    $email = $_POST["email"];
+    $sđt = $_POST["sđt"];
     $password = $_POST["password"];
     $confirmPassword = $_POST["confirm_password"];
     $create_time = date("Y-m-d H:i:s");
@@ -36,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $errorMsg = "Tài khoản đã tồn tại!";
         } else {
             // Lưu thông tin đăng ký vào cơ sở dữ liệu
-            $sql = "INSERT INTO users (create_time, name, username, password) VALUES ('$create_time','$name','$username', '$password')";
+            $sql = "INSERT INTO users (create_time, name, email, sđt, username, password) VALUES ('$create_time','$name','$email',$sđt,'$username', '$password')";
             if (mysqli_query($conn, $sql)) {
                 $successMsg = "Đăng ký thành công!";
             } else {
@@ -164,6 +166,32 @@ mysqli_close($conn);
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               />
             </div>
+            <div class="col-span-6">
+              <label for="user" class="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+  
+              <input
+              style="padding:10px"
+                type="email"
+                id="email"
+                name="email"
+                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              />
+            </div>
+            <div class="col-span-6">
+              <label for="user" class="block text-sm font-medium text-gray-700">
+                Số điện thoại (+84)
+              </label>
+  
+              <input
+              style="padding:10px"
+                type="number"
+                id="sđt"
+                name="sđt"
+                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              />
+            </div>
   
             <div class="col-span-6 sm:col-span-3">
               <label
@@ -198,19 +226,6 @@ mysqli_close($conn);
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               />
             </div>
-  
-            <div class="col-span-6">
-              <label for="MarketingAccept" class="flex gap-4">
-                <input
-                  type="checkbox"
-                  id="MarketingAccept"
-                  name="marketing_accept"
-                  class="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
-                />
-              </label>
-            </div>
-  
-  
             <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
               <button type="submit" value="Register"
                 class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"

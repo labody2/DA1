@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quản lí trang</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -114,7 +114,12 @@
                     Danh mục bài báo
                 </div>
             </div></a>
-
+            <a href="?link=dashboard-change" id="dashboard-change"><div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            <svg width="20" fill="#FFFFFF" height="20" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m20 20h-15.25c-.414 0-.75.336-.75.75s.336.75.75.75h15.75c.53 0 1-.47 1-1v-15.75c0-.414-.336-.75-.75-.75s-.75.336-.75.75zm-1-17c0-.478-.379-1-1-1h-15c-.62 0-1 .519-1 1v15c0 .621.52 1 1 1h15c.478 0 1-.379 1-1zm-15.5.5h14v14h-14zm2.749 7.806 2.924 2.504c.142.127.321.19.498.19.203 0 .405-.082.553-.243l4.953-5.508c.131-.144.196-.324.196-.503 0-.41-.331-.746-.748-.746-.204 0-.405.082-.554.243l-4.453 4.962-2.371-2.011c-.144-.128-.321-.19-.499-.19-.415 0-.748.335-.748.746 0 .205.084.409.249.556z" fill-rule="nonzero"/></svg>
+                <div>
+                    Duyệt sản phẩm
+                </div>
+            </div></a>
         </div>
         <!-- MINI SIDEBAR-->
         <div class= "mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
@@ -149,6 +154,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
                 </svg>
             </div></a>
+            <a href="?link=dashboard-change" id="dashboard-change" title="Duyệt sản phẩm"><div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+            <svg width="20" fill="#FFFFFF" height="20" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="-5 0 28 24" xmlns="http://www.w3.org/2000/svg"><path d="m20 20h-15.25c-.414 0-.75.336-.75.75s.336.75.75.75h15.75c.53 0 1-.47 1-1v-15.75c0-.414-.336-.75-.75-.75s-.75.336-.75.75zm-1-17c0-.478-.379-1-1-1h-15c-.62 0-1 .519-1 1v15c0 .621.52 1 1 1h15c.478 0 1-.379 1-1zm-15.5.5h14v14h-14zm2.749 7.806 2.924 2.504c.142.127.321.19.498.19.203 0 .405-.082.553-.243l4.953-5.508c.131-.144.196-.324.196-.503 0-.41-.331-.746-.748-.746-.204 0-.405.082-.554.243l-4.453 4.962-2.371-2.011c-.144-.128-.321-.19-.499-.19-.415 0-.748.335-.748.746 0 .205.084.409.249.556z" fill-rule="nonzero"/></svg>
+            </div></a>
         </div>
         
     </aside>
@@ -159,13 +167,13 @@
                 <li class = "inline-flex items-center">
                     <a href="../view/page/index.php?link=trang_chu" class = "inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                         <svg class = "w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                        Home
+                        Trang chủ
                     </a>
                 </li>
                 <li>
                     <div class = "flex items-center">
                         <svg class = "w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
-                        <a href="#" class = "ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Templates</a>
+                        <a href="#" class = "ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Admin</a>
                     </div>
                 </li>
             </ol>
@@ -345,6 +353,10 @@
             case 'dashboard-del':
             include 'C:\Users\dungv\Desktop\DA1\controller_admin\controller_admin_product.php';
             break;   
+            
+            case 'dashboard-change':
+            include 'C:\Users\dungv\Desktop\DA1\admin\admin_product\admin_product_approval.php';
+            break; 
 
             case 'dashboard-add':
             include 'C:\Users\dungv\Desktop\DA1\admin\admin_product\add_product.html';

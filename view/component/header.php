@@ -99,7 +99,7 @@
                                     <li class="menu-icon"><a href="../page/index.php?link=BĐS">Nhà đất</a>
                                     <ul>
                                         <?php foreach ($categories as $category) : ?>                                  
-                                            <li class="menu-icon"><a href="../page/index.php?link=BĐS"><?= $category['category_name'] ?></a></li>
+                                            <li class="menu-icon"><a href="../page/index.php?link=BĐS&categoryId=<?= $category['id']?>"><?= $category['category_name'] ?></a></li>
                                         <?php endforeach; ?>
                                     </ul>
                                         </li>
