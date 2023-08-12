@@ -6,6 +6,10 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <!-- Place favicon.png in the root directory -->
     <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
@@ -17,13 +21,12 @@
     <!-- Responsive css -->
     <link rel="stylesheet" href="../css/responsive.css">
 </head>
-<body> 
+<body class="flex flex-col min-h-screen"> 
 <?php
     include_once 'C:\Users\dungv\Desktop\DA1\view\component\header.php';
 ?>
-<div class="container_main">
-<?php
-    
+<div class="container_main flex-grow h-auto ">
+    <?php
     $link = isset($_GET['link']) ? $_GET['link'] : 'trang_chu'; {
 
         switch ($link) {
@@ -59,6 +62,14 @@
             include '../page/product_own.php';
             break;
 
+            case 'profile':
+            include '../page/profile.php';
+            break;
+
+            case 'recharge':
+            include '../page/recharge.php';
+            break;
+
             default:
             include '../page/home.php';
             break;
@@ -66,8 +77,10 @@
         }
     ?>
 </div>
+<footer class="p-4 text-center bottom-0 inset-x-0" >
 <?php
     include 'C:\Users\dungv\Desktop\DA1\view\component\footer.html';
 ?>
+</footer>
 </body>
 </html>

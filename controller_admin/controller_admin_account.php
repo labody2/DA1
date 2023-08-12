@@ -15,6 +15,18 @@ function getUsers($conn)
     }
     return $users;
 }
+function getUserRecharge($conn)
+{
+    $sql = "SELECT * FROM users WHERE recharge_amount_pending >0";
+    $result = $conn->query($sql);
+    $users = array();
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $users[] = $row;
+        }
+    }
+    return $users;
+}
 
 // Function to get user detail by username
 function getUserDetail($conn, $username)
@@ -198,6 +210,7 @@ function deleteUser($conn, $userId)
             }, 1000);
         </script>';
     }
+    exit();
 }
 
 // Process form data
@@ -239,7 +252,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 window.location.href = \'/admin/admin_control.php?link=users\';
             }, 1000);
             </script>';
-            exit();
         } else {
             echo '            
             <script src="https://cdn.tailwindcss.com"></script>
@@ -275,10 +287,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "GET"&& isset($_GET["name"])) {
+    rechargeByUsername($conn, $_GET["name"]);
+}
 // Delete user
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
+if ($_SERVER["REQUEST_METHOD"] == "GET"&& isset($_GET["id"])) {
     $userId = $_GET["id"];
     if (isset($_GET["action"])) {
+
         $action = $_GET["action"];
         if ($action === "delete") {
             deleteUser($conn, $userId);
@@ -309,6 +325,65 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
         }
     }
 } 
+
+function rechargeByUsername($conn, $username)
+{
+    // Trước tiên, lấy thông tin người dùng bằng username
+    $sql = "SELECT id, credit,recharge_amount_pending FROM users WHERE username = '$username'";
+    $result = $conn->query($sql);
+
+    if ($result && $result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        $userId = $row['id'];
+        $amount= $row['recharge_amount_pending'];
+        $currentCredit = $row['credit'];
+
+        // Cộng giá trị $amount vào credit hiện tại
+        $newCredit = $currentCredit + $amount;
+
+        // Cập nhật giá trị credit mới vào cơ sở dữ liệu
+        $updateSql = "UPDATE users SET credit = '$newCredit', recharge_amount_pending = 0 WHERE id = '$userId'";
+        if ($conn->query($updateSql) === TRUE) {
+            echo '
+            <script src="https://cdn.tailwindcss.com"></script>
+            <div class=" flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+                <span class="font-medium">Thành công!</span> 
+            </div>
+        ';    
+            echo '<script>
+            setTimeout(function() {
+                window.location.href = \'/admin/admin_control.php?link=dashboard-recharge\';
+            }, 1000);
+            </script>';
+            exit();
+        } else {
+            return "Lỗi khi cập nhật dữ liệu: " . $conn->error;
+        }
+    } else {
+        echo '            
+            <script src="https://cdn.tailwindcss.com"></script>
+            <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+            <span class="font-medium">Thất bại!</span> Người dùng không tồn tại.
+            </div>
+            </div>
+        ';
+            echo '<script>
+                setTimeout(function() {
+                    window.history.back();
+                }, 1000);
+            </script>';
+    }
+}
 
 function toggleUserStatus($conn, $userId)
 {

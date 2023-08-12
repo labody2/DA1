@@ -137,7 +137,7 @@
                                 <ul>
                                     <?php if ($loggedIn): ?>
                                         <!-- Nếu session tồn tại, hiển thị các liên kết My Account và Wishlist -->
-                                        <li><a href=""><?php echo $_SESSION["username"] ?></a></li>
+                                        <li><a href="../page/index.php?link=profile"><?php echo $_SESSION["username"] ?></a></li>
                                         <?php
                                         if (checkAdmin($conn,$_SESSION["username"])=='admin') {
                                             echo '<li><a href="/admin/admin_control.php">Quản trị</a></li>';

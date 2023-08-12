@@ -286,7 +286,7 @@ function deleteProduct($conn, $productId)
         </svg>
         <span class="sr-only">Info</span>
         <div>
-        <span class="font-medium">Thất bại!</span> Tài khoản đã tồn tại
+        <span class="font-medium">Thất bại!</span>
         </div>
         </div>
     ';

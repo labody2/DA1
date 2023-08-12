@@ -120,6 +120,29 @@
                     Duyệt sản phẩm
                 </div>
             </div></a>
+            <a href="?link=dashboard-recharge" id="dashboard-change"><div class =  "hover:ml-4 w-full text-white hover:text-purple-500 dark:hover:text-blue-500 bg-[#1E293B] p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">
+            <svg id='Initiate_Money_Transfer_24' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+                <g transform="matrix(0.16 0 0 0.16 12 12)" >
+                <g style="" >
+                <g transform="matrix(1 0 0 1 0 22)" id="Layer_1" >
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" translate(-64, -86)" d="M 124 58 L 124 114 C 124 119.5 119.5 124 114 124 L 14 124 C 8.5 124 4 119.5 4 114 L 4 58 C 4 52.5 8.5 48 14 48 L 114 48 C 119.5 48 124 52.5 124 58 z" stroke-linecap="round" />
+                </g>
+                <g transform="matrix(1 0 0 1 0 22)" id="Layer_1" >
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(68,75,84); fill-rule: nonzero; opacity: 1;" transform=" translate(-64, -86)" d="M 114 127 L 14 127 C 6.8 127 1 121.2 1 114 L 1 58 C 1 50.8 6.8 45 14 45 L 114 45 C 121.2 45 127 50.8 127 58 L 127 114 C 127 121.2 121.2 127 114 127 z M 14 51 C 10.1 51 7 54.1 7 58 L 7 114 C 7 117.9 10.1 121 14 121 L 114 121 C 117.9 121 121 117.9 121 114 L 121 58 C 121 54.1 117.9 51 114 51 L 14 51 z" stroke-linecap="round" />
+                </g>
+                <g transform="matrix(1 0 0 1 0 22)" id="Layer_1" >
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,214,198); fill-rule: nonzero; opacity: 1;" transform=" translate(-64, -86)" d="M 64 66 C 52.954305003384135 66 44 74.95430500338414 44 86 C 44 97.04569499661586 52.954305003384135 106 64 106 C 75.04569499661586 106 84 97.04569499661586 84 86 C 84 74.95430500338414 75.04569499661586 66 64 66 Z" stroke-linecap="round" />
+                </g>
+                <g transform="matrix(1 0 0 1 0 -45.5)" id="Layer_1" >
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(68,75,84); fill-rule: nonzero; opacity: 1;" transform=" translate(-64, -18.5)" d="M 81.1 16.9 L 66.1 1.8999999999999986 C 65.5 1.3 64.8 1 64 1 C 63.2 1 62.5 1.3 61.9 1.9 L 46.9 16.9 C 45.699999999999996 18.099999999999998 45.699999999999996 20 46.9 21.099999999999998 C 47.5 21.7 48.3 21.999999999999996 49 21.999999999999996 C 49.7 21.999999999999996 50.5 21.699999999999996 51.1 21.099999999999998 L 61 11.199999999999998 L 61 33 C 61 34.7 62.3 36 64 36 C 65.7 36 67 34.7 67 33 L 67 11.2 L 76.9 21.1 C 77.5 21.700000000000003 78.30000000000001 22 79 22 C 79.69999999999999 22 80.5 21.7 81.1 21.1 C 82.3 19.9 82.3 18.1 81.1 16.9 z" stroke-linecap="round" />
+                </g>
+                </g>
+                </g>
+            </svg>
+                <div>
+                    Duyệt nạp tiền
+                </div>
+            </div></a>
         </div>
         <!-- MINI SIDEBAR-->
         <div class= "mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
@@ -156,6 +179,26 @@
             </div></a>
             <a href="?link=dashboard-change" id="dashboard-change" title="Duyệt sản phẩm"><div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
             <svg width="20" fill="#FFFFFF" height="20" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="-5 0 28 24" xmlns="http://www.w3.org/2000/svg"><path d="m20 20h-15.25c-.414 0-.75.336-.75.75s.336.75.75.75h15.75c.53 0 1-.47 1-1v-15.75c0-.414-.336-.75-.75-.75s-.75.336-.75.75zm-1-17c0-.478-.379-1-1-1h-15c-.62 0-1 .519-1 1v15c0 .621.52 1 1 1h15c.478 0 1-.379 1-1zm-15.5.5h14v14h-14zm2.749 7.806 2.924 2.504c.142.127.321.19.498.19.203 0 .405-.082.553-.243l4.953-5.508c.131-.144.196-.324.196-.503 0-.41-.331-.746-.748-.746-.204 0-.405.082-.554.243l-4.453 4.962-2.371-2.011c-.144-.128-.321-.19-.499-.19-.415 0-.748.335-.748.746 0 .205.084.409.249.556z" fill-rule="nonzero"/></svg>
+            </div></a>
+            <a href="?link=dashboard-recharge" id="dashboard-change" title="Duyệt nạp tiền"><div class= "hover:ml-4 justify-end pr-5 text-white hover:text-purple-500 dark:hover:text-blue-500 w-full bg-[#1E293B] p-3 rounded-full transform ease-in-out duration-300 flex">
+            <svg id='Initiate_Money_Transfer_24' width='24' height='24' viewBox='-5 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+                <g transform="matrix(0.16 0 0 0.16 12 12)" >
+                <g style="" >
+                <g transform="matrix(1 0 0 1 0 22)" id="Layer_1" >
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" translate(-64, -86)" d="M 124 58 L 124 114 C 124 119.5 119.5 124 114 124 L 14 124 C 8.5 124 4 119.5 4 114 L 4 58 C 4 52.5 8.5 48 14 48 L 114 48 C 119.5 48 124 52.5 124 58 z" stroke-linecap="round" />
+                </g>
+                <g transform="matrix(1 0 0 1 0 22)" id="Layer_1" >
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(68,75,84); fill-rule: nonzero; opacity: 1;" transform=" translate(-64, -86)" d="M 114 127 L 14 127 C 6.8 127 1 121.2 1 114 L 1 58 C 1 50.8 6.8 45 14 45 L 114 45 C 121.2 45 127 50.8 127 58 L 127 114 C 127 121.2 121.2 127 114 127 z M 14 51 C 10.1 51 7 54.1 7 58 L 7 114 C 7 117.9 10.1 121 14 121 L 114 121 C 117.9 121 121 117.9 121 114 L 121 58 C 121 54.1 117.9 51 114 51 L 14 51 z" stroke-linecap="round" />
+                </g>
+                <g transform="matrix(1 0 0 1 0 22)" id="Layer_1" >
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,214,198); fill-rule: nonzero; opacity: 1;" transform=" translate(-64, -86)" d="M 64 66 C 52.954305003384135 66 44 74.95430500338414 44 86 C 44 97.04569499661586 52.954305003384135 106 64 106 C 75.04569499661586 106 84 97.04569499661586 84 86 C 84 74.95430500338414 75.04569499661586 66 64 66 Z" stroke-linecap="round" />
+                </g>
+                <g transform="matrix(1 0 0 1 0 -45.5)" id="Layer_1" >
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(68,75,84); fill-rule: nonzero; opacity: 1;" transform=" translate(-64, -18.5)" d="M 81.1 16.9 L 66.1 1.8999999999999986 C 65.5 1.3 64.8 1 64 1 C 63.2 1 62.5 1.3 61.9 1.9 L 46.9 16.9 C 45.699999999999996 18.099999999999998 45.699999999999996 20 46.9 21.099999999999998 C 47.5 21.7 48.3 21.999999999999996 49 21.999999999999996 C 49.7 21.999999999999996 50.5 21.699999999999996 51.1 21.099999999999998 L 61 11.199999999999998 L 61 33 C 61 34.7 62.3 36 64 36 C 65.7 36 67 34.7 67 33 L 67 11.2 L 76.9 21.1 C 77.5 21.700000000000003 78.30000000000001 22 79 22 C 79.69999999999999 22 80.5 21.7 81.1 21.1 C 82.3 19.9 82.3 18.1 81.1 16.9 z" stroke-linecap="round" />
+                </g>
+                </g>
+                </g>
+            </svg>
             </div></a>
         </div>
         
@@ -356,6 +399,10 @@
             
             case 'dashboard-change':
             include 'C:\Users\dungv\Desktop\DA1\admin\admin_product\admin_product_approval.php';
+            break; 
+
+            case 'dashboard-recharge':
+            include 'C:\Users\dungv\Desktop\DA1\admin\admin_account\approval_recharge.php';
             break; 
 
             case 'dashboard-add':

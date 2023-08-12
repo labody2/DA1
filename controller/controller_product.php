@@ -133,7 +133,7 @@ function getProductbyProductId($conn, $ids)
 
 function getProductbyCategoryId($conn, $categoryId)
 {
-    $sql = "SELECT * FROM products WHERE categoryId = '$categoryId'";
+    $sql = "SELECT * FROM products WHERE categoryId = '$categoryId' AND status = 'success'";
     $result = $conn->query($sql);
 
     $products = array();
@@ -219,8 +219,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include 'C:\Users\dungv\Desktop\DA1\controller\controller_account.php';
     $accountId_post=getIdByUsername($conn, $account_name);
     addProduct($conn,$address,$productName, $price, $description, $categoryId, $imageFiles, $other_room, $bathroom, $square, $accountId_post,$bed_room);
-    
+    listFee($conn, $account_name);
 }
+function listFee($conn, $username){
+    $sqlCheck = "SELECT credit FROM users WHERE username = '$username'";
+    $result = $conn->query($sqlCheck);
+
+    if ($result && $result->num_rows === 1) {
+        $row = $result->fetch_assoc();
+        $credit = $row['credit'];
+        if ($credit >= 50000) {
+            $sqlUpdate = "UPDATE users SET credit = credit - 50000 WHERE username = '$username'";
+            if ($conn->query($sqlUpdate) === TRUE) {
+                echo "<script>alert ('Đăng bất động sản thành công');</script>";
+                echo "<script>window.location.href = '../view/page/index.php?link=trang_chu';</script>";
+            } else {
+            echo "<script>alert ('Có lỗi xảy ra');</script>";
+            echo '<script>
+            setTimeout(function() {
+                window.history.back();
+            }, 1000);
+                </script>';
+            }
+        } else {
+            echo "<script>alert ('Số dư không đủ để đăng bài, tối thiểu 50000');</script>";
+            echo '<script>
+            setTimeout(function() {
+                window.history.back();
+            }, 1000);
+                </script>';
+        }
+    } else {
+        echo "<script>alert ('Có lỗi xảy ra');</script>";
+        echo '<script>
+        setTimeout(function() {
+            window.history.back();
+        }, 1000);
+            </script>';
+    }
+}
+
+
 function addProduct($conn,$address, $productName, $price, $description, $categoryId, $imageFiles, $other_room, $bathroom, $square, $accountId_post,$bed_room)
 {
     $imagePaths = array();
@@ -277,8 +316,6 @@ function addProduct($conn,$address, $productName, $price, $description, $categor
 
             // Thực thi câu truy vấn
             if ($conn->query($sql) === TRUE) {
-                echo "<script>alert ('Đăng bất động sản thành công');</script>";
-                echo "<script>window.location.href = '../view/page/index.php?link=trang_chu';</script>";
                 return true; // Thêm sản phẩm thành công
             } else {
                 // echo "<script>alert ('Có lỗi xảy ra');</script>";
@@ -289,9 +326,21 @@ function addProduct($conn,$address, $productName, $price, $description, $categor
             }
         } else {
             echo "<script>alert ('Không có hình ảnh được tải lên, bạn vui lòng tải ảnh lên');</script>"; 
+            echo '<script>
+            setTimeout(function() {
+                window.history.back();
+            }, 1000);
+                </script>';
+                exit();
         }
     } else {
          echo "<script>alert ('Không có hình ảnh được tải lên, bạn vui lòng tải ảnh lên');</script>";
+         echo '<script>
+         setTimeout(function() {
+             window.history.back();
+         }, 1000);
+             </script>';
+        exit();
     }
    
 }
