@@ -55,7 +55,7 @@
                                 <li>
                                     <!-- header-top-btn -->
                                     <div class="header-top-btn">
-                                        <a href="../page/index.php?link=dang_BĐS">Add Listing</a>
+                                        <a href="../page/index.php?link=dang_BĐS">Đăng bất động sản</a>
                                     </div>
                                 </li>
                             </ul>
@@ -99,7 +99,7 @@
                                     <li class="menu-icon"><a href="../page/index.php?link=BĐS">Nhà đất</a>
                                     <ul>
                                         <?php foreach ($categories as $category) : ?>                                  
-                                            <li class="menu-icon"><a href="../page/index.php?link=BĐS&categoryId=<?= $category['id']?>"><?= $category['category_name'] ?></a></li>
+                                            <li ><a href="../page/index.php?link=BĐS&categoryId=<?= $category['id']?>"><?= $category['category_name'] ?></a></li>
                                         <?php endforeach; ?>
                                     </ul>
                                         </li>

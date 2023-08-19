@@ -40,6 +40,7 @@
                 <th scope="col" class="px-6 py-3">
                     Button
                 </th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -76,6 +77,12 @@
                             <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                                 Duyệt nạp tiền
                             </span></a>';  
+                        echo '
+                        </td>';
+                        echo '
+                        <td class="px-6 py-4">';
+                            echo '<a href="/admin/admin_control.php?link=users-change-status&&cancel=' . $user["username"] . '" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">                        
+                                Hủy nạp</a>';  
                         echo '
                         </td>';
                         

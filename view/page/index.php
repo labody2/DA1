@@ -50,6 +50,10 @@
             include '../page/article-card.php';
             break;
 
+            case 'tin_tuc_chi_tiet':
+            include '../page/article-detail.php';
+            break;
+
             case 'lien_he':
             include '../page/contact.php';
             break;

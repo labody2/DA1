@@ -28,14 +28,21 @@
     include_once 'C:\Users\dungv\Desktop\DA1\controller\controller_account.php';
     include_once 'C:\Users\dungv\Desktop\DA1\admin\start_session.php';
     if (isset($_SESSION["username"])) {
+        $userData = getAllByUsername($conn, $_SESSION["username"]);
+        if ($userData !== null) {
+            foreach ($userData as $user) {
+        }}else{
+            echo "Có lỗi xảy ra";
+        }
+        $historyData = getHistoryTransactions($conn,$user['id']);
+        if ($historyData !== null) {
+        }else{
+            echo "Có lỗi xảy ra";
+        }
     }else{
         header("Location: /view/signin_signup/signin.php ");
         exit();
     }
-    $userData = getAllByUsername($conn, $_SESSION["username"]);
-    if ($userData !== null) {
-        foreach ($userData as $user) {
-        }}
     ?>
 <div class="bg-gray-100 flex-grow ">
     <div class="container mx-auto my-5 p-5">
@@ -138,10 +145,10 @@
                     <div class="bg-white md:p-2 p-6 rounded-lg border border-gray-200 mb-4 lg:mb-0 shadow-md lg:w-[35%]">
                     <div class="flex justify-center items-center space-x-5 h-full">
                         <div>
-                            <p>Số dư khả dụng</p>
-                            <h2 class="text-4xl font-bold text-gray-600"><?= $user['credit']?>đ</h2>
+                            <p>Số dư khả dụng:</p>
+                            <h2 class="text-3xl font-bold text-gray-600"><?= number_format($user['credit']);?></h2>
                         </div>
-                        <img src="https://www.emprenderconactitud.com/img/Wallet.png" alt="wallet" class="h-24 md:h-20 w-38">
+                        <img src="https://www.emprenderconactitud.com/img/Wallet.png" alt="wallet" class="h-17 md:h-13 w-25">
                     </div>
                 </div>
 
@@ -166,77 +173,46 @@
                             <i class="fas fa-qrcode text-white text-4xl"></i>
                             <p class="text-white">Nạp qua Qr</p>
                         </div>
-
-                        <script>
-                            // Lấy các phần tử nút bằng cách sử dụng id
-                            const napTienButton = document.getElementById("napTienButton");
-                            const lichSuNapTienButton = document.getElementById("lichSuNapTienButton");
-                            const napQuaQRButton = document.getElementById("napQuaQRButton");
-
-                            // Thêm sự kiện click cho mỗi nút
-                            napTienButton.addEventListener("click", function() {
-                                // Thực hiện chuyển hướng tới trang nap-tien.php
-                                window.location.href = "/view/page/index.php?link=recharge";
-                            });
-
-                            lichSuNapTienButton.addEventListener("click", function() {
-                                // Thực hiện chuyển hướng tới trang lich-su-nap-tien.php
-                                window.location.href = "lich-su-nap-tien.php";
-                            });
-
-                            napQuaQRButton.addEventListener("click", function() {
-                                // Thực hiện chuyển hướng tới trang nap-qua-qr.php
-                                window.location.href = "nap-qua-qr.php";
-                            });
-                        </script>
-
                     </div>
                 </div>
 
                 <!-- Tabla -->
-                <div class="bg-white rounded-lg p-4 shadow-md my-4 max-h-100 overflow-y-scroll" >
+                <div id="lichSuNapTienDiv" class="bg-white rounded-lg p-4 shadow-md my-4 max-h-100 overflow-y-scroll" style="display: none;" >
                     <table class="table-auto w-full">
                         <thead>
                             <tr>
                                 <th class="px-4 py-2 text-left border-b-2 w-full">
-                                    <h2 class="text-ml font-bold text-gray-600">Transacciones</h2>
+                                    <h2 class="text-ml font-bold text-gray-600">Lịch sử nạp tiền</h2>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b w-full">
+                            <?php
+                            foreach ($historyData as $data) {
+                            ?>
+                               <tr class="border-b w-full">
                                 <td class="px-4 py-2 text-left align-top w-1/2">
                                     <div>
-                                        <h2>Comercio</h2>
-                                        <p>24/07/2023</p>
+                                        <h2>+<?= number_format($data['value'])?> đ</h2>
+                                        <p><?= $data['create_time']?></p>
                                     </div>
                                 </td>
-                                <td class="px-4 py-2 text-right text-cyan-500 w-1/2">
-                                    <p><span>150$</span></p>
+                                <td  class="px-4 py-2 text-left align-top w-1/2">
+                                    <?php
+                                    ;
+                                    if ($data['status'] === "true") {
+                                        $class = "bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300";
+                                        $text = "Thành công";
+                                    } else {
+                                        $class = "bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300";
+                                        $text = "Thất bại";
+                                    }
+                                    ?>
+                                    <div style="width:100px" class="<?php echo $class; ?>"><?php echo $text; ?></div>
                                 </td>
-                            </tr>
-                            <tr class="border-b w-full">
-                                <td class="px-4 py-2 text-left align-top w-1/2">
-                                    <div>
-                                        <h2>Comercio</h2>
-                                        <p>24/06/2023</p>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-2 text-right text-cyan-500 w-1/2">
-                                    <p><span>15$</span></p>
-                                </td>
-                            </tr>
-                            <tr class="border-b w-full">
-                                <td class="px-4 py-2 text-left align-top w-1/2">
-                                    <div>
-                                        <h2>Comercio</h2>
-                                        <p>02/05/2023</p>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-2 text-right text-cyan-500 w-1/2">
-                                    <p><span>50$</span></p>
-                                </td>
-                            </tr>
+                            </tr> 
+                            <?php } ?>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -252,9 +228,26 @@
             sidebar.classList.toggle('lg:block');
         });
     });
-</script>
+     // Lấy các phần tử nút bằng cách sử dụng id
+     const napTienButton = document.getElementById("napTienButton");
+                            const lichSuNapTienButton = document.getElementById("lichSuNapTienButton");
+                            const napQuaQRButton = document.getElementById("napQuaQRButton");
+                            const lichSuNapTienDiv = document.getElementById("lichSuNapTienDiv");
 
-                    <!-- End of Experience and education grid -->
+                            napTienButton.addEventListener("click", function() {
+                                window.location.href = "/view/page/index.php?link=recharge";
+                            });
+
+                            lichSuNapTienButton.addEventListener("click", function() {
+                                // Thay đổi thuộc tính display của div
+                                lichSuNapTienDiv.style.display = "block";
+                            });
+
+
+                            napQuaQRButton.addEventListener("click", function() {
+                                window.location.href = "nap-qua-qr.php";
+                            });
+</script>
                 </div>
                 <!-- End of profile tab -->
             </div>

@@ -288,7 +288,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "GET"&& isset($_GET["name"])) {
-    rechargeByUsername($conn, $_GET["name"]);
+    rechargeByUsername($conn, $_GET["name"],"true");
+}
+if ($_SERVER["REQUEST_METHOD"] == "GET"&& isset($_GET["cancel"])) {
+    rechargeByUsername($conn, $_GET["cancel"],"false");
 }
 // Delete user
 if ($_SERVER["REQUEST_METHOD"] == "GET"&& isset($_GET["id"])) {
@@ -326,18 +329,52 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"&& isset($_GET["id"])) {
     }
 } 
 
-function rechargeByUsername($conn, $username)
+function rechargeByUsername($conn, $username,$status)
 {
     // Trước tiên, lấy thông tin người dùng bằng username
     $sql = "SELECT id, credit,recharge_amount_pending FROM users WHERE username = '$username'";
     $result = $conn->query($sql);
-
+    // $sql="Update"
     if ($result && $result->num_rows == 1) {
         $row = $result->fetch_assoc();
         $userId = $row['id'];
         $amount= $row['recharge_amount_pending'];
         $currentCredit = $row['credit'];
-
+        //thêm vào history
+        if ($status==="false") {
+            $sql="INSERT INTO recharge_history (create_time,id_user,value,status) VALUES (CURRENT_TIMESTAMP(),$userId,$amount,'$status')";
+            if ($conn->query($sql) === TRUE) {   
+            } else {
+                echo "Lỗi: " . $sql . "<br>" . $conn->error;
+            }
+            $updateSql = "UPDATE users SET recharge_amount_pending = 0 WHERE id = '$userId'";
+            if ($conn->query($updateSql) === TRUE) {  
+                echo '
+                <script src="https://cdn.tailwindcss.com"></script>
+                <div class=" flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+                <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    <span class="font-medium">Thành công!</span> 
+                </div>
+            ';     
+                echo '<script>
+                setTimeout(function() {
+                    window.location.href = \'/admin/admin_control.php?link=dashboard-recharge\';
+                }, 1000);
+                </script>';
+            } else {
+                return "Lỗi khi cập nhật dữ liệu: " . $conn->error;
+            }
+            exit();
+            }
+        $sql="INSERT INTO recharge_history(create_time,id_user,value,status)VALUES (CURRENT_TIMESTAMP(),$userId,$amount,'$status')";
+        if ($conn->query($sql) === TRUE) {
+        } else {
+            echo "Lỗi: " . $sql . "<br>" . $conn->error;
+        }
         // Cộng giá trị $amount vào credit hiện tại
         $newCredit = $currentCredit + $amount;
 
@@ -373,7 +410,7 @@ function rechargeByUsername($conn, $username)
             </svg>
             <span class="sr-only">Info</span>
             <div>
-            <span class="font-medium">Thất bại!</span> Người dùng không tồn tại.
+            <span class="font-medium">Thất bại!</span> 
             </div>
             </div>
         ';
@@ -383,6 +420,7 @@ function rechargeByUsername($conn, $username)
                 }, 1000);
             </script>';
     }
+    
 }
 
 function toggleUserStatus($conn, $userId)

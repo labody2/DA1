@@ -34,7 +34,17 @@ function deleteArticle($conn, $articleId)
 {
     $sql = "DELETE FROM article WHERE id = $articleId";
     if (mysqli_query($conn, $sql) === TRUE) {
-        echo "Xóa bài báo thành công!";
+        echo '
+            <script src="https://cdn.tailwindcss.com"></script>
+            <div class=" flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+                <span class="font-medium">Thành công!</span> 
+            </div>
+        ';
         echo "<script>window.location.href = '/admin/admin_control.php?link=article';</script>";
     } else {
         echo "Lỗi: " . $sql . "<br>" . mysqli_error($conn);
@@ -42,7 +52,7 @@ function deleteArticle($conn, $articleId)
 }
 
 //thêm article
-function processForm($conn, $title, $content, $imageFiles)
+function processForm($conn, $title, $video_link, $content, $imageFiles)
 {
     // Khởi tạo mảng để lưu trữ đường dẫn hình ảnh
     $imagePaths = array();
@@ -70,12 +80,21 @@ function processForm($conn, $title, $content, $imageFiles)
                         $imagePaths[] = "/admin/admin_article/img_article/". 'img'.$newFileName;
                     } else {
                         echo "Lỗi: Không thể di chuyển tệp hình ảnh.";
+                        echo '<script>
+                        window.history.back();
+                    </script>';
                     }
                 } else {
                     echo "Lỗi: Phần mở rộng tệp không được phép.";
+                    echo '<script>
+                    window.history.back();
+                </script>';
                 }
             } else {
                 echo "Lỗi: Không thể tải lên hình ảnh.";
+                echo '<script>
+                window.history.back();
+            </script>';
             }
         }
     
@@ -86,19 +105,35 @@ function processForm($conn, $title, $content, $imageFiles)
             $currentTime = date("Y-m-d H:i:s");
             $author=$_SESSION["username"];
             // Thực hiện truy vấn SQL để chèn dữ liệu mới vào bảng articles
-            $sql = "INSERT INTO article (title, author, content, images, create_time) VALUES ('$title', '$author', '$content', '$imageText', '$currentTime')";
+            $sql = "INSERT INTO article (title, author, video_link, content, images, create_time) VALUES ('$title', '$author','$video_link', '$content', '$imageText', '$currentTime')";
             if ($conn->query($sql) === TRUE) {
-                echo "Thêm bài báo thành công!";
-                        echo "<script>window.location.href = '/admin/admin_control.php?link=article';</script>";
+                echo '
+                <script src="https://cdn.tailwindcss.com"></script>
+                <div class=" flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+                <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    <span class="font-medium">Thành công!</span> 
+                </div>
+            ';     
+             echo "<script>window.location.href = '/admin/admin_control.php?link=article';</script>";
                         exit;
             } else {
                 echo "Lỗi: " . $sql . "<br>" . $conn->error;
             }
         } else {
             echo "Lỗi: Không có hình ảnh nào được tải lên.";
+            echo '<script>
+            window.history.back();
+        </script>';
         }
     } else {
         echo "Lỗi: Không có hình ảnh nào được tải lên.";
+        echo '<script>
+        window.history.back();
+    </script>';
     }
 }
 
@@ -106,16 +141,16 @@ function processForm($conn, $title, $content, $imageFiles)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST["title"];
     $content = $_POST["content"];
+    $video_link=$_POST["video_link"];
     $imageFiles = $_FILES['image'];
 
     if (isset($_POST["update"])) {
         $articleId=$_POST["articleId"];
         // Thực hiện hành động sửa bài báo
-        updateArticle($conn, $articleId, $title, $content, $imageFiles);
+        updateArticle($conn, $articleId,$video_link, $title, $content, $imageFiles);
         
     } elseif (isset($_POST["add"])) {
-        // Thực hiện hành động xóa bài báo
-        processForm($conn, $title, $content, $imageFiles);
+        processForm($conn, $title,$video_link, $content, $imageFiles);
     }
    
 }
@@ -133,7 +168,7 @@ function getArticleDetail($conn, $articleId)
     }
 }
 // Hàm cập nhật bài báo dựa vào ID
-function updateArticle($conn, $articleId, $title, $content, $imageFiles)
+function updateArticle($conn, $articleId,$video_link, $title, $content, $imageFiles)
 {
     $article = getArticleDetail($conn, $articleId);
     $currentTime = date("Y-m-d H:i:s");
@@ -164,12 +199,21 @@ function updateArticle($conn, $articleId, $title, $content, $imageFiles)
                             $imagePaths[] = "/admin/admin_article/img_article/" . 'img' . $newFileName;
                         } else {
                             echo "Lỗi: Không thể di chuyển tệp hình ảnh.";
+                            echo '<script>
+                            window.history.back();
+                        </script>';
                         }
                     } else {
                         echo "Lỗi: Phần mở rộng tệp không được phép.";
+                        echo '<script>
+                        window.history.back();
+                    </script>';
                     }
                 } else {
                     echo "Lỗi: Không thể tải lên hình ảnh.";
+                    echo '<script>
+                    window.history.back();
+                </script>';
                 }
             }
 
@@ -178,23 +222,46 @@ function updateArticle($conn, $articleId, $title, $content, $imageFiles)
                 // Chuyển mảng thành chuỗi bằng cách nối các đường dẫn với dấu phẩy (,).
                 $imageText = implode(",", $imagePaths);
                 // Cập nhật thông tin của bài báo trong cơ sở dữ liệu
-                $sql = "UPDATE article SET create_time='$currentTime', title = '$title', author = '$author', content = '$content', images = '$imageText' WHERE id = $articleId";
+                $sql = "UPDATE article SET create_time='$currentTime', title = '$title', author = '$author', content = '$content', images = '$imageText',video_link='$video_link' WHERE id = $articleId";
 
                 if ($conn->query($sql) === TRUE) {
-                    echo "Cập nhật bài báo thành công!";
+                    echo '
+                        <script src="https://cdn.tailwindcss.com"></script>
+                        <div class=" flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+                        <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        <span class="sr-only">Info</span>
+                        <div>
+                            <span class="font-medium">Thành công!</span> 
+                        </div>
+                    ';     
                     echo "<script>window.location.href = '/admin/admin_control.php?link=article';</script>";
                 } else {
                     echo "Lỗi: " . $sql . "<br>" . $conn->error;
                 }
             } else {
                 echo "Lỗi: Không có hình ảnh nào được tải lên.";
+                echo '<script>
+                        window.history.back();
+                    </script>';
             }
         } else {
             // Nếu không có hình ảnh mới được tải lên, chỉ cập nhật các trường thông tin khác
-            $sql = "UPDATE article SET create_time='$currentTime' , title = '$title', author = '$author', content = '$content' WHERE id = $articleId";
+            $sql = "UPDATE article SET create_time='$currentTime' , title = '$title', author = '$author', content = '$content',video_link='$video_link' WHERE id = $articleId";
 
             if ($conn->query($sql) === TRUE) {
-                echo "Cập nhật bài báo thành công!";
+                echo '
+                    <script src="https://cdn.tailwindcss.com"></script>
+                    <div class=" flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert" style="max-width:500px;text-align: center;margin: 10 auto;">
+                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div>
+                        <span class="font-medium">Thành công!</span> 
+                    </div>
+                ';     
                 echo "<script>window.location.href = '/admin/admin_control.php?link=article';</script>";
             } else {
                 echo "Lỗi: " . $sql . "<br>" . $conn->error;

@@ -54,6 +54,9 @@
                     Description
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Address
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Action
                 </th>
             </tr>
@@ -76,7 +79,7 @@
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <?= $product["id"] ?>
                     </th>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white product-name">
+                    <th scope="row" class="">
                         <?= $product["name"] ?>
                     </td>
                     <td class="px-6 py-4" >
@@ -86,10 +89,14 @@
                         <?= $product["categoryId"] ?>
                     </td>
                     <td class="px-6 py-4">
-                        <?= $product["price"] ?>đ
+                        <?= $product["price"] ?>tỷ đồng
                     </td>
                     <td class="px-6 py-4">
-                        <?= $product["description"] ?>
+                        <?= strlen($product["description"]) > 200 ? substr($product["description"], 0, 200) . "..." : $product["description"] ?>
+                    </td>
+
+                    <td class="px-6 py-4">
+                        <?= $product["address"] ?>
                     </td>
                     <td class="px-6 py-4">
                          <a href="/admin/admin_control.php?link=dashboard-edit&&product_id=<?= $product['id'] ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Sửa</a>

@@ -16,6 +16,22 @@ function getAllByUsername($conn, $username)
         return null;
     }
 }
+function getHistoryTransactions($conn, $id_user)
+{
+    $sql = "SELECT DISTINCT * FROM recharge_history WHERE id_user = '$id_user'";
+    $result = $conn->query($sql);
+    
+    if ($result && $result->num_rows > 0) {
+        $rows = array();  
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row; 
+        }
+        return $rows;
+    } else {
+        echo 'Có lỗi xảy ra';
+        return null;
+    }
+}
 
 function getIdByUsername($conn, $username)
 {

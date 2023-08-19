@@ -22,13 +22,6 @@
 </head>
 
 <body>
-    <!--[if lte IE 9]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-    <![endif]-->
-
-    <!-- Add your site or application content here -->
-
-    <!-- Body main wrapper start -->
     <div class="body-wrapper">
 
         <!-- HEADER AREA START (header-5) -->
@@ -243,11 +236,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ltn__breadcrumb-inner">
-                            <h1 class="page-title">About Us</h1>
+                            <h1 class="page-title">Về chúng tôi</h1>
                             <div class="ltn__breadcrumb-list">
                                 <ul>
-                                    <li><a href="index.html"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
-                                    <li>About Us</li>
+                                    <li><a href="/view/page/index.php?link=trang_chu"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Trang chủ</a></li>
+                                    <li>Về chúng tôi</li>
                                 </ul>
                             </div>
                         </div>

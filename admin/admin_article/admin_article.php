@@ -17,8 +17,9 @@
                 <th class="px-4 py-2">Tiêu đề</th>
                 <th class="px-4 py-2">Tác giả</th>
                 <th class="px-4 py-2">Nội dung</th>
+                <th class="px-4 py-2">Link video</th>
                 <th class="px-4 py-2">Hình ảnh</th>
-                <th class="px-4 py-2">Thao tác</th>
+                <th class="px-4 py-2" colspan="2">Thao tác</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +38,7 @@
                     <td class="border px-4 py-2"><?= $article['title'] ?></td>
                     <td class="border px-4 py-2"><?= $article['author'] ?></td>
                     <td class="border px-4 py-2"><?= $article['content'] ?></td>
+                    <td class="border px-4 py-2"><?= $article['video_link'] ?></td>
                     <td class="border px-4 py-2">
                         <?php
                         $imageString = $article['images'];
@@ -49,8 +51,10 @@
                         ?>
                     </td>
                  
-                    <td class="border px-4 py-2">
+                    <td class="border px-4 py-5">
                         <a href="/admin/admin_control.php?link=article-edit&&id=<?= $article['id'] ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sửa</a>
+                    </td>
+                    <td class="border px-4 py-5">
                         <a href="/admin/admin_control.php?link=article-del&&id=<?= $article['id'] ?>&action=delete" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="return confirm('Bạn có chắc chắn muốn xóa bài báo này?')">Xóa</a>
                     </td>
                 </tr>

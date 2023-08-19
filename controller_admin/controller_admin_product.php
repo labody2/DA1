@@ -3,7 +3,7 @@
 include 'C:\Users\dungv\Desktop\DA1\model\connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($_GET["action"] == "change_fail") {
+    if (isset($_GET["action"])&&_GET["action"] == "change_fail") {
         $messageFail = $_POST["message_fail"];
         if (changeStatusProductFail($conn, $_GET["id"],$messageFail)) {
             echo'<script src="https://cdn.tailwindcss.com"></script>
@@ -91,8 +91,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $price = $_POST["price"];
     $description = $_POST["description"];
+    $address = $_POST["address"];
     // Gọi hàm addProduct để thêm sản phẩm vào cơ sở dữ liệu
-    if (addProduct($conn, $name, $price, $description)) {
+    $result = addProduct($conn, $name, $price, $description,$address);
+    if ($result === true) {
         header("Location: /admin/admin_control.php?link=dashboard");  
         exit();
     } else {
@@ -299,10 +301,10 @@ function deleteProduct($conn, $productId)
     }
 }
 
-function addProduct($conn, $name, $price, $description)
+function addProduct($conn, $name, $price, $description,$address)
 {
     $create_time = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO products (name, price, description, create_time) VALUES ('$name', $price, '$description', '$create_time')";
+    $sql = "INSERT INTO products (name, price, description, create_time,address) VALUES ('$name', $price, '$description', '$create_time','$address')";
     
     if ($conn->query($sql) === TRUE) {
         return true;

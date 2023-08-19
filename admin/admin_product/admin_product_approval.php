@@ -103,7 +103,7 @@ include 'C:\Users\dungv\Desktop\DA1\model\connect.php';?>
                             <?= $product["price"] ?>đ
                         </td>
                         <td class="px-6 py-4">
-                            <?= $product["description"] ?>
+                            <?= strlen($product["description"]) > 200 ? substr($product["description"], 0, 200) . "..." : $product["description"] ?>
                         </td>
                         <td class="px-6 py-4" style="color: <?= ($product["status"] === 'fail') ? 'red' : 'green' ?>">
                             <?= $product["status"] ?>
